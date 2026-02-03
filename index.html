@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miricom</title>
+    <link rel="icon" type="image/png" href="media/favicon.png">
+    <link rel="stylesheet" href="media/style.css">
+    <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Desktop Navbar -->
+<nav class="desktop_navbar">
+  <a href="#"><img class="desktop_navbar_logo_img" src="media/logo_small.png" alt="Logo"></a>
+  <a href="./wiki/" class="desktop_navbar_link">Wiki</a>
+  <a href="#discord" class="desktop_navbar_link scroll">Community</a>
+  <a href="#about" class="desktop_navbar_link scroll">Über uns</a>
+  <div class="desktop_navbar_link2_div">
+      <a href="#join" class="desktop_navbar_link2 scroll">Mitspielen!</a>
+  </div>
+</nav>
+
+<!-- Mobile Navbar -->
+<div class="mobile_navbar">
+  <a href="#" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="media/logo_small.png" alt="Logo"></a>
+  <div id="mobile_navbar_links">
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="./wiki/index.html">Wiki</a>
+      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#discord">Community</a>
+      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#about">Über uns</a>
+      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#join">Mitspielen!</a>
+  </div>
+  <div class="icon" onclick="mobile_navbar_link_hider()">
+      <i class="fa fa-bars"></i>
+  </div>
+  <script>
+    function mobile_navbar_link_hider() {
+      var x = document.getElementById("mobile_navbar_links");
+      if (x.style.display === "flex") {
+          x.style.display = "none";
+      } else {
+          x.style.display = "flex";
+      }
+    } 
+  </script>
+</div>
+
+<!-- Hauptbereich -->
+<div class="mainflex">
+  <div class="main1">
+    <a class="main1_logo_a" href="#">
+      <img class="main1_logo" src="media/logo.png" alt="Logo">
+    </a>
+    <div class="main1_description">
+      <a class="main1_actcent">Minecraft</a><br>
+      <a>wie wir</a>
+    </div>
+    <div class="main1_ipcopier_div">
+      <button class="main1_ipcopier" onclick="copyText()" type="button">
+        <span class="main1_ipcopier_text1">miron.holodyn.ski</span>
+        <br>
+        <span class="main1_ipcopier_text2">Zum Kopieren klicken</span>
+      </button>
+      <script>
+        function copyText() {
+            navigator.clipboard.writeText("miron.holodyn.ski");
+        }
+        $(document).ready(function() {
+          $('.main1_ipcopier').click(function() {
+              var popup = $('<div>', { class: 'main1_popup' })
+              .append($('<h3 class="copy_confirm">').text('IP in die Zwischenablage kopiert'))
+              $(this).after(popup);
+              setTimeout(function() { popup.remove(); }, 1000);
+          });
+        });
+      </script>
+    </div>
+    <a href="#more" class="scroll">
+      <img alt="Pfeil nach unten" class="main1_downarrow" src="media/downarrow.png">
+    </a>
+    <script>
+      const scrollLinks = document.querySelectorAll('.scroll');
+      scrollLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+          event.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          const offsetTop = target.offsetTop;
+          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        });
+      });
+    </script>
+  </div>
+
+  <div id="more"></div>
+
+  <!-- Features -->
+  <div class="main2">
+    <a class="headline">Unsere Features</a>
+    <div class="main2_features_div">
+      <div class="main2_feature" onclick="">
+        <img class="main2_feature_img" alt="Feature Bild" src="media/placeholder.png">
+        <a class="main2_feature_headline">Survival-Welten</a>
+        <a class="main2_feature_text">Spiele in mehreren Survival-Welten mit Freunden.</a>
+      </div>
+      <div class="main2_feature">
+        <img class="main2_feature_img" alt="Feature Bild" src="media/placeholder.png">
+        <a class="main2_feature_headline">Minispiele</a>
+        <a class="main2_feature_text">Nimm an spaßigen Minispielen und Events teil.</a>
+      </div>
+      <div class="main2_feature">
+        <img class="main2_feature_img" alt="Feature Bild" src="media/placeholder.png">
+        <a class="main2_feature_headline">Wirtschaftssystem</a>
+        <a class="main2_feature_text">Handeln und Geld verdienen im Wirtschaftssystem.</a>
+      </div>
+      <div class="main2_feature">
+        <img class="main2_feature_img" alt="Feature Bild" src="media/placeholder.png">
+        <a class="main2_feature_headline">Community</a>
+        <a class="main2_feature_text">Freundliche Spieler und aktives Team.</a>
+      </div>
+      <div class="main2_feature">
+        <img class="main2_feature_img" alt="Feature Bild" src="media/placeholder.png">
+        <a class="main2_feature_headline">Events</a>
+        <a class="main2_feature_text">Wöchentliche Events mit Preisen und Herausforderungen.</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discord -->
+  <div id="discord"></div>
+  <div class="main4">
+    <a class="headline">Tritt unserem Discord bei</a>
+    <div class="main4_dc_div">
+      <iframe class="main4_dc_widget" src="https://discord.com/widget?id=1398660969500246137&theme=dark" width="350" height="500" title="Discord" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      <div class="main4_dc_description_div">
+        <a class="main4_dc_description_title">Trete der Community bei!</a>
+        <a class="main4_dc_description">・Treffe andere Spieler <br>・Stelle Fragen <br>・Bleibe über Updates informiert <br>・Gib Feedback <br>&amp; mehr</a>
+        <a href="https://discord.gg/NHnzNF2rYv" rel="nofollow" class="main4_dc_button_a">
+          <div class="main4_dc_button">Mitmachen</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Über uns -->
+  <div id="about"></div>
+  <div class="main5">
+    <a class="headline">Wer wir sind</a>
+    <div class="main5_admin_div">
+      <div class="main5_admins_div main5_admins_dev_type2">
+        <img class="main5_admins_img" alt="Owner Bild" src="media/Miriho6643.png">
+        <div class="main5_admins_description_div">
+          <a class="main5_admins_description_rank main5_admins_description_rank_owner">[Owner]</a>
+          <a class="main5_admins_description_title" href="/userpages/miriho6643.html">Miriho6643</a>
+          <a class="main5_admins_description">Contentcreator und Owner</a>
+        </div>
+      </div>
+      <div class="main5_admins_div main5_admins_dev_type1">
+        <img class="main5_admins_img" alt="Admin Bild" src="media/ablalabana.png">
+        <div class="main5_admins_description_div">
+          <a class="main5_admins_description_rank main5_admins_description_rank_admin">[Admin]</a>
+          <a class="main5_admins_description_title" href="/userpages/ablalabana.html">Ablalabana</a>
+          <a class="main5_admins_description">Administrator und Moderator</a>
+        </div>
+      </div>
+      <div class="main5_admins_div main5_admins_dev_type2">
+        <img class="main5_admins_img" alt="Developer Bild" src="media/citybuilderbot.png">
+        <div class="main5_admins_description_div">
+          <a class="main5_admins_description_rank main5_admins_description_rank_admin">[Dev]</a>
+          <a class="main5_admins_description_title" href="/userpages/citybuilderbot.html">CityBuilderBot</a>
+          <a class="main5_admins_description">Developer und Moderator</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supporter -->
+    <div class="main5_supporter_div">
+      <div class="main5_supporters_div">
+        <img class="main5_supporters_img" alt="Supporter Bild" src="media/member_placeholder.webp">
+        <div class="main5_supporters_description_div">
+          <a class="main5_supporters_description_rank main5_supporters_description_rank_supporter">[Supporter]</a>
+          <a class="main5_supporters_description_title">Supporter 1</a>
+          <a class="main5_supporters_description">Unterstützt Community-Events.</a>
+        </div>
+      </div>
+      <div class="main5_supporters_div">
+        <img class="main5_supporters_img" alt="Supporter Bild" src="media/member_placeholder.webp">
+        <div class="main5_supporters_description_div">
+          <a class="main5_supporters_description_rank main5_supporters_description_rank_supporter">[Supporter]</a>
+          <a class="main5_supporters_description_title">Supporter 2</a>
+          <a class="main5_supporters_description">Hilft neuen Spielern.</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mitspielen -->
+  <div id="join"></div>
+  <div class="main3">
+    <a class="headline">So kannst du mitspielen</a>
+    <div class="main3_join_div_div">
+      <div class="main3_join_div">
+        <a class="main3_join_title">Java</a>
+        <div class="main3_join_content_div">
+          <div class="main3_join_categories">
+            <a>IP:</a>
+            <a>Version:</a>
+          </div>
+          <div class="main3_join_values">
+            <a>miron.holodyn.ski</a>
+            <a>1.21.9</a>
+          </div>
+        </div>
+      </div>
+      <div class="main3_join_div">
+        <a class="main3_join_title">Bedrock</a>
+        <div class="main3_join_content_div">
+          <div class="main3_join_categories">
+            <a>IP:</a>
+            <a>Port:</a>
+          </div>
+          <div class="main3_join_values">
+            <a>miron.holodyn.ski</a>
+            <a>69420</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="copyright_div">
+  <a href="https://github.com/FQQD/MCServer-Web-Template" class="copyright">Erstellt von FQQD 2023 - Bearbeitet von Miriho6643 2025</a>
+</footer>
+</body>
+</html>
