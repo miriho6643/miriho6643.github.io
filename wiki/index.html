@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miricom Wiki</title>
+<link rel="icon" type="image/png" href="../media/favicon.png">
+<link rel="stylesheet" href="../media/style.css">
+<link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2c2c2c;
+  padding: 10px 20px;
+}
+.navbar a {
+  color: #f0f0f0;
+  text-decoration: none;
+  margin: 0 10px;
+}
+.navbar a:hover { color: #00d8ff; }
+.wiki-header {
+  text-align: center;
+  padding: 50px 20px 20px 20px;
+  background-color: #282828;
+}
+.wiki-header h1 { margin:0; font-size:3em; color:#00d8ff; }
+.wiki-header p { margin-top:10px; font-size:1.2em; }
+.discord-button {
+  display:inline-block;
+  background-color:#7289da;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:8px;
+  text-decoration:none;
+  margin:10px 0;
+}
+.discord-button:hover { background-color:#5b6eae; }
+.wiki-section {
+  max-width:1000px;
+  margin:40px auto;
+  padding:20px;
+  background-color:#2c2c2c;
+  border-radius:12px;
+}
+.wiki-section h2 { color:#00d8ff; margin-bottom:15px; }
+.wiki-section ul { padding-left:20px; }
+.wiki-section ul li { margin-bottom:10px; }
+.event-item {
+  margin-bottom:10px;
+  padding:10px;
+  background-color:#383838;
+  border-radius:8px;
+}
+footer {
+  text-align:center;
+  padding:20px;
+  background-color:#282828;
+  color:#888;
+  margin-top:50px;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="../index.html">Startseite</a>
+  <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#server-rules">Regeln</a>
+  <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#plugins">Plugins</a>
+  <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#commands">Befehle</a>
+  <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#events">Events</a>
+</nav>
+
+<script>
+    function mobile_navbar_link_hider() {
+      var x = document.getElementById("mobile_navbar_links");
+      if (x.style.display === "flex") {
+          x.style.display = "none";
+      } else {
+          x.style.display = "flex";
+      }
+    } 
+  </script>
+
+<!-- Header -->
+<div class="wiki-header">
+  <h1>Miricom Wiki</h1>
+  <p>Alles, was du über unseren Minecraft-Server wissen musst!</p>
+  <a href="https://discord.gg/NHnzNF2rYv" class="discord-button">Discord beitreten</a>
+</div>
+
+<!-- Server Regeln -->
+<div class="wiki-section" id="server-rules">
+  <h2>Server Regeln</h2>
+  <ul>
+    <li>Keine Beleidigungen oder toxisches Verhalten.</li>
+    <li>Kein Cheaten, Hacking oder Exploits.</li>
+    <li>Respektiere die Gebäude anderer Spieler.</li>
+    <li>Folge den Anweisungen von Admins und Moderatoren.</li>
+    <li>Wer gegen die Regeln verstößt, kann bestraft werden.</li>
+  </ul>
+</div>
+
+<!-- Plugins -->
+<div class="wiki-section" id="plugins">
+  <h2>Installierte Plugins</h2>
+  <ul>
+    <li>WorldEdit - Erstelle und bearbeite große Bauwerke schneller.</li>
+    <li>GMchange - Schneller Spielmodiwechsel für Admins</li>
+    <li>TP - Standartbefehle (siehe unten)</li>
+    <li>ViaVersion/ViaBackwards - Multiversion Plugin.</li>
+    <li>VoiceChat - Rede mit anderen Spielern.</li>
+  </ul>
+</div>
+
+<!-- Befehle -->
+<div class="wiki-section" id="commands">
+  <h2>Wichtige Befehle</h2>
+  <ul>
+    <li>/spawn - Teleportiert dich zum Spawnpunkt.</li>
+    <li>/home [Home] - Teleportiert dich zu deinem Haus.</li>
+    <li>/warp [Ort] - Teleportiere dich zu einem öffentlichen Warp-Punkt.</li>
+    <li>/msg [Spieler] [Nachricht] - Sende private Nachrichten.</li>
+    <li>/sethome [Home] - Setzt deinen Homepoint</li>
+    <li>/plugins - Zeigt alle aktiven Plugins an (Admin-Befehl).</li>
+    <li>/tpa [Spieler] - Sendet eine Teleportanforderung an einen Spieler.</li>
+    <li>/tpaaccept - Nimmt eine Teleportanfrage an</li>
+  </ul>
+</div>
+
+<!-- Events -->
+<div class="wiki-section" id="events">
+  <h2>Aktuelle Events</h2>
+  <div id="event-list"></div>
+</div>
+
+<footer>
+  &copy; 2025 Miricom Minecraft Server - Alle Rechte vorbehalten
+</footer>
+
+<script>
+// Dynamische Events aus JSON
+async function loadEvents() {
+  try {
+    const response = await fetch('events.json');
+    const events = await response.json();
+
+    const now = new Date();
+    const eventList = document.getElementById('event-list');
+    eventList.innerHTML = '';
+
+    const futureEvents = events
+      .filter(e => new Date(e.datetime) >= now)
+      .sort((a,b) => new Date(a.datetime) - new Date(b.datetime));
+
+    futureEvents.forEach(e => {
+      const eventDiv = document.createElement('div');
+      eventDiv.classList.add('event-item');
+
+      const date = new Date(e.datetime);
+      const dateStr = date.toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
+      const timeStr = date.toLocaleTimeString('de-DE', { hour:'2-digit', minute:'2-digit' });
+
+      eventDiv.innerHTML = `<strong>${e.title}</strong> - ${dateStr} ${timeStr}<br>${e.description}`;
+      eventList.appendChild(eventDiv);
+    });
+  } catch(err) {
+    console.error("Fehler beim Laden der Events:", err);
+  }
+}
+
+// Initiales Laden + alle 30 Sekunden aktualisieren
+loadEvents();
+setInterval(loadEvents, 30000);
+</script>
+
+</body>
+</html>
