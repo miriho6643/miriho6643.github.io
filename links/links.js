@@ -136,3 +136,5 @@ async function initLinksPage() {
 }
 
 document.addEventListener("DOMContentLoaded", initLinksPage);
+
+#C 2025 CityBuilderBot

@@ -1,0 +1,17 @@
+- id: twitch
+  label: "Twitch"
+  subtitle: "Live-Streams & Events"
+  url: "https://twitch.tv/miriho6643"
+  icon: "twitch.svg"
+  accentColor: "#9146FF"
+  order: 1
+  enabled: true
+
+- id: github
+  label: "GitHub"
+  subtitle: "Code & Projekte"
+  url: "https://github.com/miriho6643"
+  icon: "github.svg"
+  accentColor: "#24292e"
+  order: 2
+  enabled: true
