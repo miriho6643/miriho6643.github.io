@@ -1,89 +1,116 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miricom Wiki</title>
-<link rel="icon" type="image/png" href="../media/favicon.png">
-<link rel="stylesheet" href="../media/style.css">
-<link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body {
-  font-family: 'Space Grotesk', sans-serif;
-  background-color: #1e1e1e;
-  color: #f0f0f0;
-  margin: 0;
-  padding: 0;
-}
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #2c2c2c;
-  padding: 10px 20px;
-}
-.navbar a {
-  color: #f0f0f0;
-  text-decoration: none;
-  margin: 0 10px;
-}
-.navbar a:hover { color: #00d8ff; }
-.wiki-header {
-  text-align: center;
-  padding: 50px 20px 20px 20px;
-  background-color: #282828;
-}
-.wiki-header h1 { margin:0; font-size:3em; color:#00d8ff; }
-.wiki-header p { margin-top:10px; font-size:1.2em; }
-.discord-button {
-  display:inline-block;
-  background-color:#7289da;
-  color:#fff;
-  padding:10px 20px;
-  border-radius:8px;
-  text-decoration:none;
-  margin:10px 0;
-}
-.discord-button:hover { background-color:#5b6eae; }
-.wiki-section {
-  max-width:1000px;
-  margin:40px auto;
-  padding:20px;
-  background-color:#2c2c2c;
-  border-radius:12px;
-}
-.wiki-section h2 { color:#00d8ff; margin-bottom:15px; }
-.wiki-section ul { padding-left:20px; }
-.wiki-section ul li { margin-bottom:10px; }
-.event-item {
-  margin-bottom:10px;
-  padding:10px;
-  background-color:#383838;
-  border-radius:8px;
-}
-footer {
-  text-align:center;
-  padding:20px;
-  background-color:#282828;
-  color:#888;
-  margin-top:50px;
-}
-</style>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miricom Wiki</title>
+    <link rel="icon" type="image/png" href="../media/favicon.png">
+    <link rel="stylesheet" href="../media/style.css">
+    <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Wiki-spezifische Ergänzungen (passt sich ans Haupt-Design an) -->
+    <style>
+      .wiki_wrap {
+        width: min(1100px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .wiki_section {
+        margin-top: 35px;
+      }
+
+      .wiki_cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .wiki_card {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 18px 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        border: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .wiki_card_icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: rgba(0, 216, 255, 0.12);
+        color: #00d8ff;
+        flex: 0 0 auto;
+        font-size: 18px;
+      }
+
+      .wiki_card_headline {
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .wiki_card_desc {
+        opacity: 0.9;
+        line-height: 1.5;
+      }
+
+      .wiki_event_item {
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        border: 1px solid rgba(255,255,255,0.06);
+        margin-top: 12px;
+      }
+
+      .wiki_event_meta {
+        opacity: 0.8;
+        margin-top: 6px;
+      }
+
+      .wiki_empty {
+        opacity: 0.85;
+        padding: 14px 0;
+      }
+    </style>
+  </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar">
-  <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="../index.html">Startseite</a>
-  <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#server-rules">Regeln</a>
-  <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#plugins">Plugins</a>
-  <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#commands">Befehle</a>
-  <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#events">Events</a>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Desktop Navbar (wie Hauptseite) -->
+<nav class="desktop_navbar">
+  <a href="../index.html"><img class="desktop_navbar_logo_img" src="../media/logo_small.png" alt="Logo"></a>
+  <a href="../index.html" class="desktop_navbar_link">Startseite</a>
+  <a href="#server-rules" class="desktop_navbar_link scroll">Regeln</a>
+  <a href="#plugins" class="desktop_navbar_link scroll">Plugins</a>
+  <a href="#commands" class="desktop_navbar_link scroll">Befehle</a>
+  <div class="desktop_navbar_link2_div">
+      <a href="#events" class="desktop_navbar_link2 scroll">Events</a>
+  </div>
 </nav>
 
-<script>
+<!-- Mobile Navbar (wie Hauptseite) -->
+<div class="mobile_navbar">
+  <a href="../index.html" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="../media/logo_small.png" alt="Logo"></a>
+  <div id="mobile_navbar_links">
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="../index.html">Startseite</a>
+      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#server-rules">Regeln</a>
+      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#plugins">Plugins</a>
+      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#commands">Befehle</a>
+      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#events">Events</a>
+  </div>
+  <div class="icon" onclick="mobile_navbar_link_hider()">
+      <i class="fa fa-bars"></i>
+  </div>
+  <script>
     function mobile_navbar_link_hider() {
       var x = document.getElementById("mobile_navbar_links");
       if (x.style.display === "flex") {
@@ -91,97 +118,278 @@ footer {
       } else {
           x.style.display = "flex";
       }
-    } 
+    }
   </script>
-
-<!-- Header -->
-<div class="wiki-header">
-  <h1>Miricom Wiki</h1>
-  <p>Alles, was du über unseren Minecraft-Server wissen musst!</p>
-  <a href="https://discord.gg/NHnzNF2rYv" class="discord-button">Discord beitreten</a>
 </div>
 
-<!-- Server Regeln -->
-<div class="wiki-section" id="server-rules">
-  <h2>Server Regeln</h2>
-  <ul>
-    <li>Keine Beleidigungen oder toxisches Verhalten.</li>
-    <li>Kein Cheaten, Hacking oder Exploits.</li>
-    <li>Respektiere die Gebäude anderer Spieler.</li>
-    <li>Folge den Anweisungen von Admins und Moderatoren.</li>
-    <li>Wer gegen die Regeln verstößt, kann bestraft werden.</li>
-  </ul>
+<!-- Hero / Header (angelehnt an Hauptseite) -->
+<div class="mainflex">
+  <div class="main1">
+    <a class="main1_logo_a" href="../index.html">
+      <img class="main1_logo" src="../media/logo.png" alt="Logo">
+    </a>
+    <div class="main1_description">
+      <a class="main1_actcent">Miricom</a><br>
+      <a>Wiki</a>
+    </div>
+
+    <div class="main1_ipcopier_div">
+      <button class="main1_ipcopier" onclick="window.location.href='https://discord.gg/NHnzNF2rYv'" type="button">
+        <span class="main1_ipcopier_text1">Discord</span>
+        <br>
+        <span class="main1_ipcopier_text2">Zum Beitreten klicken</span>
+      </button>
+    </div>
+
+    <a href="#server-rules" class="scroll">
+      <img alt="Pfeil nach unten" class="main1_downarrow" src="../media/downarrow.png">
+    </a>
+
+    <script>
+      const scrollLinks = document.querySelectorAll('.scroll');
+      scrollLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+          event.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+          const offsetTop = target.offsetTop;
+          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        });
+      });
+    </script>
+  </div>
+
+  <!-- Wiki Content -->
+  <div class="wiki_wrap">
+
+    <div id="server-rules"></div>
+    <div class="wiki_section">
+      <a class="headline">Server Regeln</a>
+      <div class="wiki_cards">
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-gavel"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">Punkt 1</div>
+            <div class="wiki_card_desc">Keine Beleidigungen oder toxisches Verhalten.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-gavel"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">Punkt 2</div>
+            <div class="wiki_card_desc">Kein Cheaten, Hacking oder Exploits.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-gavel"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">Punkt 3</div>
+            <div class="wiki_card_desc">Respektiere die Gebäude anderer Spieler.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-gavel"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">Punkt 4</div>
+            <div class="wiki_card_desc">Folge den Anweisungen von Admins und Moderatoren.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-gavel"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">Punkt 5</div>
+            <div class="wiki_card_desc">Wer gegen die Regeln verstößt, kann bestraft werden.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="plugins"></div>
+    <div class="wiki_section">
+      <a class="headline">Installierte Plugins</a>
+      <div class="wiki_cards">
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-puzzle-piece"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">WorldEdit</div>
+            <div class="wiki_card_desc">Erstelle und bearbeite große Bauwerke schneller.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-puzzle-piece"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">GMchange</div>
+            <div class="wiki_card_desc">Schneller Spielmodiwechsel für Admins</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-puzzle-piece"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">TP</div>
+            <div class="wiki_card_desc">Standartbefehle (siehe unten)</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-puzzle-piece"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">ViaVersion/ViaBackwards</div>
+            <div class="wiki_card_desc">Multiversion Plugin.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-puzzle-piece"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">VoiceChat</div>
+            <div class="wiki_card_desc">Rede mit anderen Spielern.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="commands"></div>
+    <div class="wiki_section">
+      <a class="headline">Wichtige Befehle</a>
+      <div class="wiki_cards">
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-terminal"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">/spawn</div>
+            <div class="wiki_card_desc">Teleportiert dich zum Spawnpunkt.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-terminal"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">/home [Home]</div>
+            <div class="wiki_card_desc">Teleportiert dich zu deinem Haus.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-terminal"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">/warp [Ort]</div>
+            <div class="wiki_card_desc">Teleportiere dich zu einem öffentlichen Warp-Punkt.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-terminal"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">/msg [Spieler] [Nachricht]</div>
+            <div class="wiki_card_desc">Sende private Nachrichten.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-terminal"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">/sethome [Home]</div>
+            <div class="wiki_card_desc">Setzt deinen Homepoint</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-terminal"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">/plugins</div>
+            <div class="wiki_card_desc">Zeigt alle aktiven Plugins an (Admin-Befehl).</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-terminal"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">/tpa [Spieler]</div>
+            <div class="wiki_card_desc">Sendet eine Teleportanforderung an einen Spieler.</div>
+          </div>
+        </div>
+
+        <div class="wiki_card">
+          <div class="wiki_card_icon"><i class="fa fa-terminal"></i></div>
+          <div class="wiki_card_text">
+            <div class="wiki_card_headline">/tpaaccept</div>
+            <div class="wiki_card_desc">Nimmt eine Teleportanfrage an</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="events"></div>
+    <div class="wiki_section">
+      <a class="headline">Aktuelle Events</a>
+      <div id="event-list"></div>
+      <div id="event-empty" class="wiki_empty" style="display:none;">Aktuell sind keine Events geplant.</div>
+    </div>
+
+  </div>
 </div>
 
-<!-- Plugins -->
-<div class="wiki-section" id="plugins">
-  <h2>Installierte Plugins</h2>
-  <ul>
-    <li>WorldEdit - Erstelle und bearbeite große Bauwerke schneller.</li>
-    <li>GMchange - Schneller Spielmodiwechsel für Admins</li>
-    <li>TP - Standartbefehle (siehe unten)</li>
-    <li>ViaVersion/ViaBackwards - Multiversion Plugin.</li>
-    <li>VoiceChat - Rede mit anderen Spielern.</li>
-  </ul>
-</div>
-
-<!-- Befehle -->
-<div class="wiki-section" id="commands">
-  <h2>Wichtige Befehle</h2>
-  <ul>
-    <li>/spawn - Teleportiert dich zum Spawnpunkt.</li>
-    <li>/home [Home] - Teleportiert dich zu deinem Haus.</li>
-    <li>/warp [Ort] - Teleportiere dich zu einem öffentlichen Warp-Punkt.</li>
-    <li>/msg [Spieler] [Nachricht] - Sende private Nachrichten.</li>
-    <li>/sethome [Home] - Setzt deinen Homepoint</li>
-    <li>/plugins - Zeigt alle aktiven Plugins an (Admin-Befehl).</li>
-    <li>/tpa [Spieler] - Sendet eine Teleportanforderung an einen Spieler.</li>
-    <li>/tpaaccept - Nimmt eine Teleportanfrage an</li>
-  </ul>
-</div>
-
-<!-- Events -->
-<div class="wiki-section" id="events">
-  <h2>Aktuelle Events</h2>
-  <div id="event-list"></div>
-</div>
-
-<footer>
-  &copy; 2025 Miricom Minecraft Server - Alle Rechte vorbehalten
+<!-- Footer (wie Hauptseite) -->
+<footer class="copyright_div">
+  <a href="https://github.com/FQQD/MCServer-Web-Template" class="copyright">Erstellt von FQQD 2023 - Bearbeitet von Miriho6643 2025</a>
 </footer>
 
+<!-- YAML Parser + Event Loader -->
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
 <script>
-// Dynamische Events aus JSON
 async function loadEvents() {
+  const eventList = document.getElementById('event-list');
+  const eventEmpty = document.getElementById('event-empty');
+
   try {
-    const response = await fetch('events.json');
-    const events = await response.json();
+    const response = await fetch('events.yml', { cache: 'no-store' });
+    const yamlText = await response.text();
+    const parsed = jsyaml.load(yamlText) || {};
+    const events = Array.isArray(parsed.events) ? parsed.events : [];
 
     const now = new Date();
-    const eventList = document.getElementById('event-list');
     eventList.innerHTML = '';
 
     const futureEvents = events
-      .filter(e => new Date(e.datetime) >= now)
-      .sort((a,b) => new Date(a.datetime) - new Date(b.datetime));
+      .map(e => ({ ...e, _date: new Date(e.datetime) }))
+      .filter(e => !isNaN(e._date.getTime()) && e._date >= now)
+      .sort((a,b) => a._date - b._date);
+
+    if (futureEvents.length === 0) {
+      eventEmpty.style.display = 'block';
+      return;
+    }
+
+    eventEmpty.style.display = 'none';
 
     futureEvents.forEach(e => {
+      const dateStr = e._date.toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
+      const timeStr = e._date.toLocaleTimeString('de-DE', { hour:'2-digit', minute:'2-digit' });
+
       const eventDiv = document.createElement('div');
-      eventDiv.classList.add('event-item');
+      eventDiv.classList.add('wiki_event_item');
 
-      const date = new Date(e.datetime);
-      const dateStr = date.toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
-      const timeStr = date.toLocaleTimeString('de-DE', { hour:'2-digit', minute:'2-digit' });
-
-      eventDiv.innerHTML = `<strong>${e.title}</strong> - ${dateStr} ${timeStr}<br>${e.description}`;
+      eventDiv.innerHTML = `
+        <div><strong>${e.title || 'Event'}</strong></div>
+        <div class="wiki_event_meta">${dateStr} ${timeStr}</div>
+        <div style="margin-top:8px;">${e.description || ''}</div>
+      `;
       eventList.appendChild(eventDiv);
     });
-  } catch(err) {
+  } catch (err) {
     console.error("Fehler beim Laden der Events:", err);
+    eventEmpty.style.display = 'block';
   }
 }
 
-// Initiales Laden + alle 30 Sekunden aktualisieren
 loadEvents();
 setInterval(loadEvents, 30000);
 </script>
