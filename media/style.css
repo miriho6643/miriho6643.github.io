@@ -671,8 +671,106 @@ body {
     background-color: #000;
 }
 
+/* Page-only styles (no overrides of global site styling) */
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
+.mainflex {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+    
+.userpage_main{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:40px;
+  padding:120px 20px 60px;
+  flex-wrap:wrap;
+}
+
+.userpage_card{
+  background:#2c2c2c;
+  border-radius:20px;
+  padding:40px;
+  max-width:720px;
+  box-shadow:0 0 20px rgba(0, 216, 255, 0.35);
+  text-align:center;
+}
+
+.userpage_avatar{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  margin-bottom:20px;
+  object-fit:cover;
+  border:4px solid #00d8ff;
+}
+
+.userpage_name{
+  font-size:2.5em;
+  margin:0 0 10px 0;
+  color:#00d8ff;
+}
+
+.userpage_role{
+  display:inline-block;
+  background:#00d8ff;
+  color:#1e1e1e;
+  padding:5px 15px;
+  border-radius:12px;
+  margin-bottom:20px;
+  font-weight:bold;
+  font-size:0.95em;
+}
+
+.userpage_subtitle{
+  font-size:1.2em;
+  margin:0 0 20px 0;
+  color:#ccc;
+}
+
+.userpage_bio{
+  font-size:1em;
+  line-height:1.6;
+  text-align:justify;
+  color:#eee;
+  margin:0;
+}
+
+.userpage_links{
+  background:#1f1f1f;
+  margin-top:30px;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:inset 0 0 20px rgba(0, 216, 255, 0.35);
+}
+
+.userpage_links a{
+  display:inline-block;
+  margin:8px 10px;
+  text-decoration:none;
+  color:#00d8ff;
+  font-weight:bold;
+  transition:0.3s;
+}
+.userpage_links a:hover{ color:#ffffff; }
+
+.userpage_iframe{
+  border:0;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 20px rgba(0,0,0,0.35);
+}
 
 @media only screen and (max-width: 600px) {
     .desktop_navbar{
