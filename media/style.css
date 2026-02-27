@@ -326,6 +326,14 @@ body {
     transform: scale(1.05)
 }
 
+#lang-switch {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
 @media (max-width: 1599px) {
     .main2_features_div {
       margin-left: 10rem;
