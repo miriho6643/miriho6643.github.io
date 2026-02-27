@@ -1,5 +1,5 @@
 const YAML_CONFIG_PATH = "links.yml";
-const ICON_BASE_PATH = "icons/";
+const ICON_BASE_PATH = "Icons/";
 
 async function loadYamlConfig() {
   const res = await fetch(YAML_CONFIG_PATH, { cache: "no-store" });
