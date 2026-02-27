@@ -134,7 +134,22 @@ body {
       <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="../index.html#discord">Community</a>
       <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="../index.html#about">Über uns</a>
       <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="../index.html#join">Mitspielen!</a>
-      <div id="lang-switch" title="Sprache wechseln">🌐</div>
+      <!-- In den <body> deiner Seite einfügen, z. B. oben rechts -->
+      <div id="google_translate_element" style="position: fixed; top: 10px; right: 10px; z-index: 999;"></div>
+      
+      <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'de',        // Originalsprache deiner Seite
+          includedLanguages: 'en,fr,es,it', // gewünschte Sprachen
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+      }
+      </script>
+      
+      <script type="text/javascript" 
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+      </script>
   </div>
   <div class="icon" onclick="mobile_navbar_link_hider()">
       <i class="fa fa-bars"></i>
@@ -150,7 +165,6 @@ body {
     }
   }
 </script>
-<script src="../media/lang.js"></script>
 
 <div class="mainflex">
   <main class="userpage_main">
