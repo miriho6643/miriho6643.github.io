@@ -1,40 +1,35 @@
-- id: twitch
-  label: Twitch
-  subtitle: Live-Streams mit mir
-  url: https://twitch.tv/miriho6643
-  icon: twitch.svg
-  accentColor: '#9146FF'
+- id: discord
+  label: "Discord"
+  subtitle: "Hier findest du mich online."
+  url: "https://discord.gg/nAxnN4admc"
+  icon: "discord.svg"
+  accentColor: "#5865F2"      # Discord-Lila
   order: 1
   enabled: true
-- id: github
-  label: GitHub
-  subtitle: Mein Code & Projekte
-  url: https://github.com/miriho6643
-  icon: github.svg
-  accentColor: '#181717'
+
+- id: twitch
+  label: "Twitch"
+  subtitle: "Hier findest du mich online."
+  url: "https://twitch.tv/miriho6643"
+  icon: "twitch.svg"
+  accentColor: "#9146FF"      # Twitch-Lila
   order: 2
   enabled: true
-- id: discord
-  label: Discord-Server
-  subtitle: Chatte mit der Community
-  url: https://discord.gg/nAxnN4admc
-  icon: discord.svg
-  accentColor: '#5865F2'
+
+- id: whatsapp-kanal
+  label: "Whatsapp Kanal"
+  subtitle: "Hier findest du mich online."
+  url: "https://whatsapp.com/channel/0029Vb7FNg6BqbrF2Kzrsv07"
+  icon: "whatsapp.svg"
+  accentColor: "#25D366"      # WhatsApp-Grün
   order: 3
   enabled: true
-- id: whatsapp-kanal
-  label: WhatsApp-Kanal
-  subtitle: Neuigkeiten direkt auf WhatsApp
-  url: https://whatsapp.com/channel/0029Vb7FNg6BqbrF2Kzrsv07
-  icon: whatsapp.svg
-  accentColor: '#25D366'
+
+- id: github
+  label: "GitHub"
+  subtitle: "Hier findest du mich online."
+  url: "https://github.com/miriho6643"
+  icon: "github.svg"
+  accentColor: "#238636"      # GitHub-Button-Grün (gut sichtbar)
   order: 4
-  enabled: true
-- id: webseite
-  label: Webseite
-  subtitle: Meine Website
-  url: https://miriho6643.github.io
-  icon: homepage.svg
-  accentColor: '#333333'
-  order: 5
   enabled: true
