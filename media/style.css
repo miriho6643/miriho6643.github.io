@@ -469,7 +469,8 @@ body {
 
 .main5_admins_img {
     border-radius: var(--roundness);
-    pady: 20px;
+    padding-left: 1rem;
+    padding-right: 1rem;
     max-width: 45%;
     max-height: 100%;
     align-self: center;
