@@ -175,24 +175,24 @@
       </div>
     </div>
 
-    <!-- Supporter -->
-    <div class="main5_supporter_div">
-      <div class="main5_supporters_div">
-        <img class="main5_supporters_img" alt="Supporter Bild" src="media/member_placeholder.webp">
+    <!-- Team Sammelseiten -->
+    <div id="team-group-links" class="main5_supporter_div">
+      <a id="helper-group-link" class="main5_supporters_div main5_group_link" href="/userpages/helper/">
+        <img class="main5_supporters_img" alt="Helper Bild" src="media/member_placeholder.webp">
         <div class="main5_supporters_description_div">
-          <a class="main5_supporters_description_rank main5_supporters_description_rank_supporter">[Supporter]</a>
-          <a class="main5_supporters_description_title">Supporter 1</a>
-          <a class="main5_supporters_description">Unterstützt Community-Events.</a>
+          <span class="main5_supporters_description_rank main5_supporters_description_rank_supporter">[Helper]</span>
+          <span class="main5_supporters_description_title">Helper Team</span>
+          <span class="main5_supporters_description">Hilft in bestimmten Bereichen. Zur Sammelseite.</span>
         </div>
-      </div>
-      <div class="main5_supporters_div">
-        <img class="main5_supporters_img" alt="Supporter Bild" src="media/member_placeholder.webp">
+      </a>
+      <a id="azubis-group-link" class="main5_supporters_div main5_group_link" href="/userpages/azubis/">
+        <img class="main5_supporters_img" alt="Azubis Bild" src="media/member_placeholder.webp">
         <div class="main5_supporters_description_div">
-          <a class="main5_supporters_description_rank main5_supporters_description_rank_supporter">[Supporter]</a>
-          <a class="main5_supporters_description_title">Supporter 2</a>
-          <a class="main5_supporters_description">Hilft neuen Spielern.</a>
+          <span class="main5_supporters_description_rank main5_supporters_description_rank_supporter">[Azubis]</span>
+          <span class="main5_supporters_description_title">Azubi Team</span>
+          <span class="main5_supporters_description">Lernen aktuell und koennen spaeter Helper werden. Zur Sammelseite.</span>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 
@@ -235,5 +235,42 @@
 <footer class="copyright_div">
   <a href="https://github.com/FQQD/MCServer-Web-Template" class="copyright">Erstellt von FQQD 2023 - Bearbeitet von Miriho6643 2025</a>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script>
+  async function loadYamlList(path) {
+    const res = await fetch(path, { cache: "no-store" });
+    if (!res.ok) return [];
+    const text = await res.text();
+    const parsed = jsyaml.load(text);
+    return Array.isArray(parsed) ? parsed : [];
+  }
+
+  async function toggleTeamLinksByEnabledMembers() {
+    const helperLink = document.getElementById("helper-group-link");
+    const azubisLink = document.getElementById("azubis-group-link");
+    const wrapper = document.getElementById("team-group-links");
+    if (!helperLink || !azubisLink || !wrapper) return;
+
+    const [helpers, azubis] = await Promise.all([
+      loadYamlList("/userpages/helper/helper.yml"),
+      loadYamlList("/userpages/azubis/azubis.yml")
+    ]);
+
+    const helperCount = helpers.filter((entry) => entry && entry.enabled !== false).length;
+    const azubisCount = azubis.filter((entry) => entry && entry.enabled !== false).length;
+
+    if (helperCount === 0) {
+      helperLink.style.display = "none";
+    }
+    if (azubisCount === 0) {
+      azubisLink.style.display = "none";
+    }
+    if (helperCount === 0 && azubisCount === 0) {
+      wrapper.style.display = "none";
+    }
+  }
+
+  toggleTeamLinksByEnabledMembers().catch((err) => console.error("[index teams] Fehler:", err));
+</script>
 </body>
 </html>
