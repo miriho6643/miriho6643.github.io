@@ -429,9 +429,6 @@ body {
     padding-right: 1.5rem;
 }
 
-
-
-
 .main5 {
     background-color: var(--background2);
     min-height: 10rem;
@@ -474,6 +471,7 @@ body {
     max-width: 45%;
     max-height: 100%;
     align-self: center;
+    overflow: hidden;
 }
 .main5_admins_description_div {
     display: flex;
