@@ -3,7 +3,11 @@
   subtitle: "Hier findest du mich online."
   url: "https://discord.gg/nAxnN4admc"
   icon: "discord.svg"
-  accentColor: "#5865F2"      # Discord-Lila
+  accentColor: "#5865F2"
+  cardBackground: "var(--background2)"
+  titleColor: "#ffffff"
+  subtitleColor: "#d6d6d6"
+  iconRadius: 20
   order: 1
   enabled: true
 
@@ -12,7 +16,11 @@
   subtitle: "Hier findest du mich online."
   url: "https://twitch.tv/miriho6643"
   icon: "twitch.svg"
-  accentColor: "#9146FF"      # Twitch-Lila
+  accentColor: "#9146FF"
+  cardBackground: "var(--background2)"
+  titleColor: "#ffffff"
+  subtitleColor: "#d6d6d6"
+  iconRadius: 20
   order: 2
   enabled: true
 
@@ -21,7 +29,11 @@
   subtitle: "Hier findest du mich online."
   url: "https://whatsapp.com/channel/0029Vb7FNg6BqbrF2Kzrsv07"
   icon: "whatsapp.svg"
-  accentColor: "#25D366"      # WhatsApp-Grün
+  accentColor: "#25D366"
+  cardBackground: "var(--background2)"
+  titleColor: "#ffffff"
+  subtitleColor: "#d6d6d6"
+  iconRadius: 20
   order: 3
   enabled: true
 
@@ -30,6 +42,10 @@
   subtitle: "Hier findest du mich online."
   url: "https://github.com/miriho6643"
   icon: "github.svg"
-  accentColor: "#238636"      # GitHub-Button-Grün (gut sichtbar)
+  accentColor: "#238636"
+  cardBackground: "var(--background2)"
+  titleColor: "#ffffff"
+  subtitleColor: "#d6d6d6"
+  iconRadius: 20
   order: 4
   enabled: true

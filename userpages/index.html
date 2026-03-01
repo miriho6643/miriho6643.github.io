@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Helper - Team Uebersicht</title>
-  <link rel="icon" type="image/png" href="../../media/favicon.png">
-  <link rel="stylesheet" href="../../media/style.css">
+  <title>Userpages - Miriho</title>
+  <link rel="icon" type="image/png" href="../media/favicon.png">
+  <link rel="stylesheet" href="../media/style.css">
+  <link rel="stylesheet" href="../media/discord-widget.css">
   <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body data-group-id="helper">
+<body>
 
 <nav class="desktop_navbar">
-  <a href="/"><img class="desktop_navbar_logo_img" src="../../media/logo_small.png" alt="Logo"></a>
+  <a href="/"><img class="desktop_navbar_logo_img" src="../media/logo_small.png" alt="Logo"></a>
   <a href="/wiki/" class="desktop_navbar_link">Wiki</a>
   <a href="/#discord" class="desktop_navbar_link">Community</a>
   <a href="/#about" class="desktop_navbar_link">Ueber uns</a>
@@ -23,7 +24,7 @@
 </nav>
 
 <div class="mobile_navbar">
-  <a href="/" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="../../media/logo_small.png" alt="Logo"></a>
+  <a href="/" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="../media/logo_small.png" alt="Logo"></a>
   <div id="mobile_navbar_links">
       <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/wiki/">Wiki</a>
       <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/#discord">Community</a>
@@ -47,11 +48,29 @@ function mobile_navbar_link_hider() {
 </script>
 
 <div class="mainflex">
-  <section class="team_collection">
-    <a class="headline">Helper</a>
-    <p class="team_collection_intro">Helper helfen in bestimmten Bereichen. Ohne Main User Code haben sie keine erweiterten Rechte.</p>
-    <div id="team-root" class="team_collection_grid"></div>
-  </section>
+  <div id="userpages-overview" class="main5" style="padding-top: 5rem;">
+    <a class="headline">Wer wir sind</a>
+    <div id="userpages-members" class="main5_admin_div"></div>
+    <div id="userpages-groups" class="main5_supporter_div"></div>
+  </div>
+
+  <div id="user-profile" style="display:none; width:100%;">
+    <main class="userpage_main">
+      <section class="userpage_card">
+        <img id="user-avatar" class="userpage_avatar" src="../media/member_placeholder.webp" alt="Profilbild">
+        <h1 id="user-name" class="userpage_name">Unbekannt</h1>
+        <div id="user-role" class="userpage_role">Team</div>
+        <h2 id="user-subtitle" class="userpage_subtitle">Profil</h2>
+        <p id="user-bio" class="userpage_bio"></p>
+        <div id="user-links" class="userpage_links"></div>
+      </section>
+      <div id="user-discord-widget" class="tile discord-widget userpage_iframe" style="display:none;"></div>
+    </main>
+  </div>
+
+  <div id="user-not-found" class="main5" style="display:none; padding-top: 7rem; padding-bottom: 3rem;">
+    <a class="headline">User nicht gefunden</a>
+  </div>
 </div>
 
 <footer class="copyright_div">
@@ -59,7 +78,8 @@ function mobile_navbar_link_hider() {
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-<script src="../group.js"></script>
+<script src="../media/discord-widget.js"></script>
+<script src="users.js"></script>
 
 </body>
 </html>

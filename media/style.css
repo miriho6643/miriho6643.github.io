@@ -1,6 +1,6 @@
 :root {
     --nice-padding: 6rem;
-    --roundness: 0.75rem;
+    --roundness: 20px;
     --accent1: #02db02;
     --accent2: #05b305;
     --accent2_transp: #05b30555;
@@ -466,11 +466,13 @@ body {
 
 .main5_admins_img {
     border-radius: var(--roundness);
-    padding-left: 1rem;
-    padding-right: 1rem;
-    max-width: 45%;
-    max-height: 100%;
+    padding: 0;
+    width: 220px;
+    height: 220px;
+    max-width: none;
+    max-height: none;
     align-self: center;
+    object-fit: cover;
     overflow: hidden;
 }
 .main5_admins_description_div {
@@ -520,44 +522,55 @@ body {
 
 .main5_supporter_div {
     display: flex;
-    max-width: 825px;
+    width: 100%;
+    max-width: 50rem;
     justify-content: center;
     align-items: center;
-    flex-direction:row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
     margin-bottom: 1.5rem;
 }
 
 .main5_supporters_div {
-    width: 23.5rem;
-    min-height: 16rem;
+    width: min(46rem, calc(100% - 2rem));
+    min-height: 18rem;
     background-color: var(--background1);
     border-radius: var(--roundness);
-    margin: .5rem;
+    border: 1px solid transparent;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+    margin: 1rem;
     display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 1rem;
 }
 .main5_group_link {
     text-decoration: none;
     color: inherit;
-    transition: all .5s;
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
 }
 .main5_group_link:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
+    border-color: var(--rank-glow, #00d8ff);
+    box-shadow: 0 0 10px var(--rank-glow, #00d8ff), 0 0 24px color-mix(in srgb, var(--rank-glow, #00d8ff) 75%, transparent);
     background-color: #00000099;
 }
 
 .main5_supporters_img {
     border-radius: var(--roundness);
-    max-width: 25%;
-    max-height: 100%;
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
     align-self: center;
     margin: 1rem;
 }
 .main5_supporters_description_div {
     display: flex;
     justify-content: center;
-    width: 100%;
-    padding: 1rem 1.5rem 1rem 1rem;
+    width: calc(100% - 240px);
+    max-width: 60%;
+    padding: 2rem 1rem;
     flex-direction: column;
 }
 .main5_supporters_description_rank {
@@ -578,9 +591,9 @@ body {
     transition: all .5s;
     margin-bottom: .5rem;
 }
-.main5_supporters_description_title:hover {
-    color: var(--accent1);
-    transform: scale(1.05)
+.main5_group_link:hover .main5_supporters_description_title {
+    color: var(--rank-glow, #00d8ff);
+    transform: scale(1.05);
 }
 
 .main5_supporters_description {
@@ -617,6 +630,8 @@ body {
     min-height: 18rem;
     border-radius: var(--roundness);
     background-color: var(--background1);
+    border: 1px solid transparent;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
     text-decoration: none;
     color: #fff;
     display: flex;
@@ -624,20 +639,30 @@ body {
     align-items: center;
     padding: 1.25rem 1rem;
     box-sizing: border-box;
-    transition: all .5s;
+    transition: transform .25s ease, background-color .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 .team_member_card:hover {
     transform: scale(1.05);
+    border-color: #00d8ff;
+    box-shadow: 0 0 12px rgba(0, 216, 255, 0.55), 0 0 24px rgba(0, 216, 255, 0.3);
     background-color: #00000099;
 }
 
 .team_member_avatar {
     width: 7.5rem;
     height: 7.5rem;
-    border-radius: 50%;
+    border-radius: var(--roundness);
     object-fit: cover;
     border: 4px solid #00d8ff;
     margin-bottom: .75rem;
+}
+
+a.team_member_card {
+    cursor: pointer;
+}
+
+div.team_member_card {
+    cursor: default;
 }
 
 .team_member_name {
@@ -790,7 +815,7 @@ body {
 
 .userpage_card{
   background:#2c2c2c;
-  border-radius:20px;
+  border-radius: var(--roundness);
   padding:40px;
   max-width:720px;
   box-shadow:0 0 20px rgba(0, 216, 255, 0.35);
@@ -800,7 +825,7 @@ body {
 .userpage_avatar{
   width:150px;
   height:150px;
-  border-radius:50%;
+  border-radius: 0;
   margin-bottom:20px;
   object-fit:cover;
   border:4px solid #00d8ff;
@@ -817,7 +842,7 @@ body {
   background:#00d8ff;
   color:#1e1e1e;
   padding:5px 15px;
-  border-radius:12px;
+  border-radius: var(--roundness);
   margin-bottom:20px;
   font-weight:bold;
   font-size:0.95em;
@@ -841,7 +866,7 @@ body {
   background:#1f1f1f;
   margin-top:30px;
   padding:20px;
-  border-radius:15px;
+  border-radius: var(--roundness);
   box-shadow:inset 0 0 20px rgba(0, 216, 255, 0.35);
 }
 
@@ -857,7 +882,7 @@ body {
 
 .userpage_iframe{
   border:0;
-  border-radius:20px;
+  border-radius: var(--roundness);
   overflow:hidden;
   box-shadow:0 0 20px rgba(0,0,0,0.35);
 }
@@ -895,6 +920,24 @@ body {
     .main5_admins_description_div {
         max-width: 100%;
         padding: 2rem;
+    }
+    .main5_supporters_div {
+        flex-direction: column;
+        min-height: 0;
+        width: calc(100% - 2rem);
+        padding: 0;
+    }
+    .main5_supporters_img {
+        width: 170px;
+        height: 170px;
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+    .main5_supporters_description_div {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        box-sizing: border-box;
     }
     .main4_dc_div {
         flex-direction: column;
@@ -939,4 +982,65 @@ body {
     .main3_join_div_div {
         margin: .25rem;
     }
+}
+
+.userpage_avatar {
+    border-radius: 0;
+}
+
+.userpage_card,
+.userpage_iframe {
+    border-radius: var(--roundness);
+}
+
+.userpage_avatar {
+    border-radius: var(--roundness);
+}
+
+.main5_admins_img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+}
+
+.userpage_links div {
+    margin-bottom: .5rem;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.main5_admins_clickable {
+    color: inherit;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
+}
+
+.main5_admins_clickable:hover {
+    border-color: var(--rank-glow, #00d8ff);
+    box-shadow: 0 0 10px var(--rank-glow, #00d8ff), 0 0 24px color-mix(in srgb, var(--rank-glow, #00d8ff) 75%, transparent);
+    background-color: #00000099;
+    transform: scale(1.02);
+}
+
+.main5_admins_clickable .main5_admins_description_title {
+    text-decoration: none;
+}
+
+.main5_admins_clickable:hover .main5_admins_description_title {
+    color: var(--rank-glow, #00d8ff);
+    transform: none;
+}
+
+.main5_admins_avatar_link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 252px;
+    text-decoration: none;
+}
+
+.main5_admins_nonlink {
+    cursor: default;
+    pointer-events: auto;
 }

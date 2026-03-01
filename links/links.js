@@ -1,9 +1,9 @@
 const YAML_CONFIG_PATH = "links.yml";
 const ICON_BASE_PATH = "icons/";
 
-// Accent-Farbe aus YAML holen (accentColor oder accent), sonst Standard-Grün
-function pickAccent(entry) {
-  return entry.accentColor || entry.accent || "var(--accent1)";
+function pick(entry, key, fallback) {
+  const value = entry[key];
+  return value === undefined || value === null || value === "" ? fallback : value;
 }
 
 async function loadYamlConfig() {
@@ -11,12 +11,15 @@ async function loadYamlConfig() {
   if (!res.ok) {
     throw new Error("Konnte links.yml nicht laden: " + res.status);
   }
-  const text = await res.text();
-  return jsyaml.load(text);
+  return jsyaml.load(await res.text());
 }
 
 function createLinkCard(entry) {
-  const accent = pickAccent(entry);
+  const accent = pick(entry, "accentColor", "var(--accent1)");
+  const cardBackground = pick(entry, "cardBackground", "var(--background2)");
+  const titleColor = pick(entry, "titleColor", "#ffffff");
+  const subtitleColor = pick(entry, "subtitleColor", "#d6d6d6");
+  const iconSize = Number(pick(entry, "iconSize", 64));
 
   const wrapper = document.createElement("a");
   wrapper.href = entry.url;
@@ -29,33 +32,33 @@ function createLinkCard(entry) {
   wrapper.style.justifyContent = "center";
 
   const card = document.createElement("div");
-
   Object.assign(card.style, {
     display: "flex",
     alignItems: "center",
-    // ein bisschen mehr „Mitte“ in der Karte
     justifyContent: "flex-start",
     gap: "32px",
     padding: "22px 44px",
-    borderRadius: "50px",
+    borderRadius: "20px",
     maxWidth: "880px",
     width: "100%",
-    height: "120px",
-    backgroundColor: "var(--background2)",
-    border: "1px solid rgba(255,255,255,0.08)",
+    minHeight: "120px",
+    backgroundColor: cardBackground,
+    border: `1px solid ${pick(entry, "borderColor", "rgba(255,255,255,0.08)")}`,
     boxShadow: "0 10px 28px rgba(0,0,0,0.6)",
     transition: "all 0.2s ease"
   });
 
-  const icon = document.createElement("img");
-  icon.src = ICON_BASE_PATH + entry.icon;
+  const icon = document.createElement(entry.photo ? "img" : "img");
+  icon.src = entry.photo || (ICON_BASE_PATH + entry.icon);
   icon.alt = entry.label;
-
   Object.assign(icon.style, {
-    width: "64px",
-    height: "64px",
-    objectFit: "contain",
-    filter: "invert(1)",
+    width: `${iconSize}px`,
+    height: `${iconSize}px`,
+    objectFit: "cover",
+    borderRadius: `${Number(pick(entry, "iconRadius", 20))}px`,
+    backgroundColor: pick(entry, "iconBackground", "transparent"),
+    padding: `${Number(pick(entry, "iconPadding", 0))}px`,
+    filter: entry.photo ? "none" : pick(entry, "iconFilter", "invert(1)"),
     transition: "all 0.2s ease"
   });
 
@@ -70,40 +73,39 @@ function createLinkCard(entry) {
   title.textContent = entry.label;
   Object.assign(title.style, {
     fontSize: "28px",
-    fontWeight: "600"
+    fontWeight: "600",
+    color: titleColor
   });
 
   const subtitle = document.createElement("div");
   subtitle.textContent = entry.subtitle || entry.url;
   Object.assign(subtitle.style, {
     fontSize: "17px",
-    opacity: "0.9"
+    color: subtitleColor
   });
 
   textWrapper.appendChild(title);
   textWrapper.appendChild(subtitle);
-
   card.appendChild(icon);
   card.appendChild(textWrapper);
   wrapper.appendChild(card);
 
-  // Hover: Accent-Farbe + Glow + Icon-Glow
   card.addEventListener("mouseenter", () => {
-    card.style.border = "2px solid " + accent;
-    card.style.boxShadow = `
-      0 0 12px ${accent},
-      0 0 28px ${accent},
-      0 0 50px ${accent}
-    `;
+    card.style.border = `2px solid ${accent}`;
+    card.style.boxShadow = `0 0 12px ${accent}, 0 0 28px ${accent}, 0 0 50px ${accent}`;
     card.style.transform = "translateY(-4px)";
-    icon.style.filter = `invert(1) drop-shadow(0 0 6px ${accent}) drop-shadow(0 0 14px ${accent})`;
+    if (!entry.photo) {
+      icon.style.filter = `invert(1) drop-shadow(0 0 6px ${accent}) drop-shadow(0 0 14px ${accent})`;
+    }
   });
 
   card.addEventListener("mouseleave", () => {
-    card.style.border = "1px solid rgba(255,255,255,0.08)";
+    card.style.border = `1px solid ${pick(entry, "borderColor", "rgba(255,255,255,0.08)")}`;
     card.style.boxShadow = "0 10px 28px rgba(0,0,0,0.6)";
     card.style.transform = "translateY(0)";
-    icon.style.filter = "invert(1)";
+    if (!entry.photo) {
+      icon.style.filter = pick(entry, "iconFilter", "invert(1)");
+    }
   });
 
   return wrapper;
@@ -118,23 +120,19 @@ async function initLinksPage() {
     flexDirection: "column",
     alignItems: "center",
     gap: "24px",
-
-    // 👇 mehr Luft nach oben & unten, statt direkt unter dem Blur-Effekt
     paddingTop: "120px",
-    paddingBottom: "120px",
-    marginTop: "0",
-    marginBottom: "0"
+    paddingBottom: "120px"
   });
 
   const config = await loadYamlConfig();
   const entries = Array.isArray(config) ? config : [];
 
   entries
-    .filter(e => e.enabled !== false)
+    .filter((e) => e.enabled !== false)
     .sort((a, b) => (a.order || 0) - (b.order || 0))
-    .forEach(entry => {
+    .forEach((entry) => {
       root.appendChild(createLinkCard(entry));
     });
 }
 
-initLinksPage().catch(err => console.error("[links.js] Fehler:", err));
+initLinksPage().catch((err) => console.error("[links.js] Fehler:", err));

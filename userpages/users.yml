@@ -1,0 +1,123 @@
+settings:
+  homepage_layout: "column"
+  card_radius_px: 20
+  default_avatar: "/media/member_placeholder.webp"
+
+team_groups:
+  - id: "helper"
+    title: "Helper Team"
+    rank_label: "[Helper]"
+    description: "Hilft in bestimmten Bereichen. Zur Sammelseite."
+    image: "/media/member_placeholder.webp"
+    link: "/userpages/helper/"
+    order: 1
+    enabled: true
+  - id: "azubis"
+    title: "Azubi Team"
+    rank_label: "[Azubis]"
+    description: "Lernen aktuell und können später Helper werden. Zur Sammelseite."
+    image: "/media/member_placeholder.webp"
+    link: "/userpages/azubis/"
+    order: 2
+    enabled: true
+
+members:
+  - id: "miriho6643"
+    name: "Miriho6643"
+    rank_label: "[Owner]"
+    rank_class: "main5_admins_description_rank_owner"
+    role: "Streamer"
+    short_description: "Contentcreator und Owner"
+    subtitle: "Biografie"
+    bio: "Miriho6643 ist ein leidenschaftlicher Technik- und Spieleenthusiast, der schon früh eine große Neugier für die Funktionsweise digitaler Welten entwickelte. Schon mit zwei Jahren begann er, sich in kreative Sandbox-Spiele wie Scrap Mechanic zu vertiefen, und erweiterte sein Interesse kurze Zeit später auf Trailmakers, das er bis heute aktiv spielt und zu dem er alle DLCs besitzt. Besonders aktiv ist er in Minecraft, das einen Großteil seiner Freizeit einnimmt, und teilt seine Abenteuer regelmäßig beim Streaming mit einer wachsenden Community. Seine Faszination für Spiele führte ihn dazu, die Mechaniken hinter den digitalen Welten zu verstehen. Mit Unterstützung seines Vaters begann er, sich mit HTML und dem Einsatz eines Raspberry Pi auseinanderzusetzen. Schnell entwickelte er eigene Projekte und Skripte und entdeckte später Python als seine bevorzugte Programmiersprache. Heute verbindet Miriho6643 seine Kreativität mit technischem Know-how, experimentiert mit Künstlicher Intelligenz und teilt seine Projekte und Spielabenteuer aktiv online. Sein Werdegang zeigt eine bemerkenswerte Mischung aus spielerischer Exploration, technischem Interesse, autodidaktischem Lernen und Community-Engagement."
+    avatar: "/media/miriho6643.png"
+    group: "core"
+    order: 1
+    enabled: true
+    profile_enabled: true
+    discord_widget_id: "1398660969500246137"
+    profile_links:
+      - label: "Twitch"
+        url: "https://twitch.tv/miriho6643"
+      - label: "Discord"
+        url: "https://discord.gg/nAxnN4admc"
+      - label: "Whatsapp Kanal"
+        url: "https://whatsapp.com/channel/0029Vb7FNg6BqbrF2Kzrsv07"
+      - label: "Whatsapp Community"
+        url: "https://chat.whatsapp.com/CyevghToMe3KED7GcUGGoX"
+      - label: "Youtube Main"
+        url: "https://youtube.com/@miriho6643"
+      - label: "Youtube Shorts"
+        url: "https://youtube.com/@mirihoshorts"
+      - label: "GitHub"
+        url: "https://github.com/miriho6643"
+
+  - id: "ablalabana"
+    name: "Ablalabana"
+    rank_label: "[Admin]"
+    rank_class: "main5_admins_description_rank_admin"
+    role: "Admin"
+    short_description: "Administrator und Moderator"
+    subtitle: "Biografie"
+    bio: "Er heisst nicht Max!!!"
+    avatar: "/media/member_placeholder.webp"
+    group: "core"
+    order: 2
+    enabled: true
+    profile_enabled: true
+    discord_widget_id: "1398660969500246137"
+    profile_links:
+      - label: "Twitch"
+        url: "https://twitch.tv/ablalabana"
+      - label: "Discord"
+        url: "https://discord.gg/rUCAjnd7s3"
+
+  - id: "citybuilderbot"
+    name: "CityBuilderBot"
+    rank_label: "[Dev]"
+    rank_class: "main5_admins_description_rank_admin"
+    role: "Developer"
+    short_description: "Developer und Moderator"
+    subtitle: "Biografie"
+    bio: "Ich heisse nicht Max!!!"
+    avatar: "/media/member_placeholder.webp"
+    group: "core"
+    order: 3
+    enabled: true
+    profile_enabled: true
+    discord_widget_id: "1401610453083357284"
+    profile_links:
+      - label: "Website"
+        url: "https://188.34.176.79/"
+      - label: "GitHub"
+        url: "https://github.com/CityBuilderBot-Tech"
+      - label: "Discord"
+        url: "https://discord.gg/Zq3mr83AJX"
+
+  - id: "jwave"
+    name: "JWave"
+    rank_label: "[Azubi]"
+    role: "Azubi"
+    category: "Developer Azubi"
+    short_description: "Lernt aktuell Development und Community-Basics."
+    subtitle: "Profil"
+    bio: "Lernt aktuell Development und Community-Basics."
+    avatar: "/media/member_placeholder.webp"
+    group: "azubis"
+    order: 20
+    enabled: false
+    profile_enabled: false
+
+  - id: "derkomischefabi"
+    name: "DerKomischeFabi"
+    rank_label: "[Azubi]"
+    role: "Azubi"
+    category: "Developer Azubi"
+    short_description: "Lernt aktuell Development und Community-Basics."
+    subtitle: "Profil"
+    bio: "Lernt aktuell Development und Community-Basics."
+    avatar: "/media/member_placeholder.webp"
+    group: "azubis"
+    order: 21
+    enabled: false
+    profile_enabled: false

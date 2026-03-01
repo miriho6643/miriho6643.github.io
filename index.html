@@ -7,51 +7,50 @@
     <title>Miriho's Webseite</title>
     <link rel="icon" type="image/png" href="media/favicon.png">
     <link rel="stylesheet" href="media/style.css">
+    <link rel="stylesheet" href="media/discord-widget.css">
     <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- Desktop Navbar -->
 <nav class="desktop_navbar">
-  <a href="#"><img class="desktop_navbar_logo_img" src="media/logo_small.png" alt="Logo"></a>
-  <a href="./wiki/" class="desktop_navbar_link">Wiki</a>
-  <a href="#discord" class="desktop_navbar_link scroll">Community</a>
-  <a href="#about" class="desktop_navbar_link scroll">Über uns</a>
+  <a href="/"><img class="desktop_navbar_logo_img" src="media/logo_small.png" alt="Logo"></a>
+  <a href="/wiki/" class="desktop_navbar_link">Wiki</a>
+  <a href="/#discord" class="desktop_navbar_link scroll">Community</a>
+  <a href="/#about" class="desktop_navbar_link scroll">Über uns</a>
   <div class="desktop_navbar_link2_div">
-      <a href="#join" class="desktop_navbar_link2 scroll">Mitspielen!</a>
+      <a href="/#join" class="desktop_navbar_link2 scroll">Mitspielen!</a>
   </div>
 </nav>
 
-<!-- Mobile Navbar -->
 <div class="mobile_navbar">
-  <a href="#" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="media/logo_small.png" alt="Logo"></a>
+  <a href="/" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="media/logo_small.png" alt="Logo"></a>
   <div id="mobile_navbar_links">
-      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="./wiki/index.html">Wiki</a>
-      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#discord">Community</a>
-      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#about">Über uns</a>
-      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#join">Mitspielen!</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/wiki/">Wiki</a>
+      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="/#discord">Community</a>
+      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="/#about">Über uns</a>
+      <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="/#join">Mitspielen!</a>
   </div>
   <div class="icon" onclick="mobile_navbar_link_hider()">
       <i class="fa fa-bars"></i>
   </div>
-  <script>
-    function mobile_navbar_link_hider() {
-      var x = document.getElementById("mobile_navbar_links");
-      if (x.style.display === "flex") {
-          x.style.display = "none";
-      } else {
-          x.style.display = "flex";
-      }
-    } 
-  </script>
 </div>
 
-<!-- Hauptbereich -->
+<script>
+function mobile_navbar_link_hider() {
+  var x = document.getElementById("mobile_navbar_links");
+  if (x.style.display === "flex") {
+      x.style.display = "none";
+  } else {
+      x.style.display = "flex";
+  }
+}
+</script>
+
 <div class="mainflex">
   <div class="main1">
-    <a class="main1_logo_a" href="#">
+    <a class="main1_logo_a" href="/">
       <img class="main1_logo" src="media/logo.png" alt="Logo">
     </a>
     <div class="main1_description">
@@ -59,48 +58,23 @@
       <a>wie wir</a>
     </div>
     <div class="main1_ipcopier_div">
-      <button class="main1_ipcopier" onclick="copyText()" type="button">
-        <span class="main1_ipcopier_text1">IP</span>
+      <button id="copy-ip" class="main1_ipcopier" onclick="copyText()" type="button">
+        <span class="main1_ipcopier_text1" data-ip-target>IP wird geladen...</span>
         <br>
         <span class="main1_ipcopier_text2">Zum Kopieren klicken</span>
       </button>
-      <script>
-        function copyText() {
-            navigator.clipboard.writeText("IP");
-        }
-        $(document).ready(function() {
-          $('.main1_ipcopier').click(function() {
-              var popup = $('<div>', { class: 'main1_popup' })
-              .append($('<h3 class="copy_confirm">').text('IP in die Zwischenablage kopiert'))
-              $(this).after(popup);
-              setTimeout(function() { popup.remove(); }, 1000);
-          });
-        });
-      </script>
     </div>
     <a href="#more" class="scroll">
       <img alt="Pfeil nach unten" class="main1_downarrow" src="media/downarrow.png">
     </a>
-    <script>
-      const scrollLinks = document.querySelectorAll('.scroll');
-      scrollLinks.forEach(function(link) {
-        link.addEventListener('click', function(event) {
-          event.preventDefault();
-          const target = document.querySelector(link.getAttribute('href'));
-          const offsetTop = target.offsetTop;
-          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-        });
-      });
-    </script>
   </div>
 
   <div id="more"></div>
 
-  <!-- Features -->
   <div class="main2">
     <a class="headline">Unsere Features</a>
     <div class="main2_features_div">
-      <div class="main2_feature" onclick="">
+      <div class="main2_feature">
         <img class="main2_feature_img" alt="Feature Bild" src="media/placeholder.png">
         <a class="main2_feature_headline">Survival-Welten</a>
         <a class="main2_feature_text">Spiele in mehreren Survival-Welten mit Freunden.</a>
@@ -128,75 +102,21 @@
     </div>
   </div>
 
-  <!-- Discord -->
   <div id="discord"></div>
   <div class="main4">
     <a class="headline">Tritt unserem Discord bei</a>
     <div class="main4_dc_div">
-      <iframe class="main4_dc_widget" src="https://discord.com/widget?id=1398660969500246137&theme=dark" width="350" height="500" title="Discord" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-      <div class="main4_dc_description_div">
-        <a class="main4_dc_description_title">Trete der Community bei!</a>
-        <a class="main4_dc_description">・Treffe andere Spieler <br>・Stelle Fragen <br>・Bleibe über Updates informiert <br>・Gib Feedback <br>&amp; mehr</a>
-        <a href="https://discord.gg/NHnzNF2rYv" rel="nofollow" class="main4_dc_button_a">
-          <div class="main4_dc_button">Mitmachen</div>
-        </a>
-      </div>
+      <div class="tile discord-widget" data-server-id="1398660969500246137" data-invite-url="https://discord.gg/NHnzNF2rYv"></div>
     </div>
   </div>
 
-  <!-- Über uns -->
   <div id="about"></div>
   <div class="main5">
     <a class="headline">Wer wir sind</a>
-    <div class="main5_admin_div">
-      <div class="main5_admins_div main5_admins_dev_type2">
-        <img class="main5_admins_img" alt="Owner Bild" src="media/miriho6643.png">
-        <div class="main5_admins_description_div">
-          <a class="main5_admins_description_rank main5_admins_description_rank_owner">[Owner]</a>
-          <a class="main5_admins_description_title" href="/userpages/miriho6643.html">Miriho6643</a>
-          <a class="main5_admins_description">Contentcreator und Owner</a>
-        </div>
-      </div>
-      <div class="main5_admins_div main5_admins_dev_type1">
-        <img class="main5_admins_img" alt="Admin Bild" src="media/ablalabana.png">
-        <div class="main5_admins_description_div">
-          <a class="main5_admins_description_rank main5_admins_description_rank_admin">[Admin]</a>
-          <a class="main5_admins_description_title" href="/userpages/ablalabana.html">Ablalabana</a>
-          <a class="main5_admins_description">Administrator und Moderator</a>
-        </div>
-      </div>
-      <div class="main5_admins_div main5_admins_dev_type2">
-        <img class="main5_admins_img" alt="Developer Bild" src="media/citybuilderbot.png">
-        <div class="main5_admins_description_div">
-          <a class="main5_admins_description_rank main5_admins_description_rank_admin">[Dev]</a>
-          <a class="main5_admins_description_title" href="/userpages/citybuilderbot.html">CityBuilderBot</a>
-          <a class="main5_admins_description">Developer und Moderator</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Team Sammelseiten -->
-    <div id="team-group-links" class="main5_supporter_div">
-      <a id="helper-group-link" class="main5_supporters_div main5_group_link" href="/userpages/helper/">
-        <img class="main5_supporters_img" alt="Helper Bild" src="media/member_placeholder.webp">
-        <div class="main5_supporters_description_div">
-          <span class="main5_supporters_description_rank main5_supporters_description_rank_supporter">[Helper]</span>
-          <span class="main5_supporters_description_title">Helper Team</span>
-          <span class="main5_supporters_description">Hilft in bestimmten Bereichen. Zur Sammelseite.</span>
-        </div>
-      </a>
-      <a id="azubis-group-link" class="main5_supporters_div main5_group_link" href="/userpages/azubis/">
-        <img class="main5_supporters_img" alt="Azubis Bild" src="media/member_placeholder.webp">
-        <div class="main5_supporters_description_div">
-          <span class="main5_supporters_description_rank main5_supporters_description_rank_supporter">[Azubis]</span>
-          <span class="main5_supporters_description_title">Azubi Team</span>
-          <span class="main5_supporters_description">Lernen aktuell und koennen spaeter Helper werden. Zur Sammelseite.</span>
-        </div>
-      </a>
-    </div>
+    <div id="main-team-members" class="main5_admin_div"></div>
+    <div id="main-team-groups" class="main5_supporter_div"></div>
   </div>
 
-  <!-- Mitspielen -->
   <div id="join"></div>
   <div class="main3">
     <a class="headline">So kannst du mitspielen</a>
@@ -209,7 +129,7 @@
             <a>Version:</a>
           </div>
           <div class="main3_join_values">
-            <a>IP</a>
+            <a data-ip-target>IP wird geladen...</a>
             <a>alle ab 1.12.1</a>
           </div>
         </div>
@@ -222,7 +142,7 @@
             <a>Port:</a>
           </div>
           <div class="main3_join_values">
-            <a>IP</a>
+            <a data-ip-target>IP wird geladen...</a>
             <a>69420</a>
           </div>
         </div>
@@ -231,46 +151,137 @@
   </div>
 </div>
 
-<!-- Footer -->
 <footer class="copyright_div">
   <a href="https://github.com/FQQD/MCServer-Web-Template" class="copyright">Erstellt von FQQD 2023 - Bearbeitet von Miriho6643 2025</a>
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
 <script>
-  async function loadYamlList(path) {
-    const res = await fetch(path, { cache: "no-store" });
-    if (!res.ok) return [];
-    const text = await res.text();
-    const parsed = jsyaml.load(text);
-    return Array.isArray(parsed) ? parsed : [];
+window.CURRENT_IP = "";
+const IP_CONFIG_PATH = "/config/ip.yml";
+
+function setIpText(value) {
+  const targets = document.querySelectorAll('[data-ip-target], #ip-display, #ip-footer');
+  targets.forEach((el) => {
+    el.textContent = value;
+  });
+}
+
+function setCopyEnabled(enabled) {
+  const copyButton = document.getElementById('copy-ip');
+  if (!copyButton) return;
+  copyButton.disabled = !enabled;
+  copyButton.style.opacity = enabled ? '1' : '0.6';
+  copyButton.style.cursor = enabled ? 'pointer' : 'not-allowed';
+}
+
+async function loadCurrentIp() {
+  try {
+    const ipValue = await resolveIpValue();
+    if (!ipValue) {
+      throw new Error('Keine IP oder Domain konfiguriert');
+    }
+    window.CURRENT_IP = ipValue;
+    setIpText(window.CURRENT_IP);
+    setCopyEnabled(true);
+  } catch (err) {
+    window.CURRENT_IP = '';
+    setIpText('IP konnte nicht geladen werden');
+    setCopyEnabled(false);
+    console.error('[ip] Fehler beim Laden:', err);
+  }
+}
+
+function copyText() {
+  if (!window.CURRENT_IP) return;
+  navigator.clipboard.writeText(window.CURRENT_IP);
+}
+
+async function loadIpConfig() {
+  const res = await fetch(IP_CONFIG_PATH, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error('Konnte ip.yml nicht laden: HTTP ' + res.status);
+  }
+  return jsyaml.load(await res.text()) || {};
+}
+
+function normalizeIpSource(source) {
+  const normalized = String(source || "").trim().toLowerCase();
+  if (normalized === "fixed") return "fixed";
+  if (normalized === "domain") return "domain";
+  return "json";
+}
+
+async function resolveIpFromJson(config) {
+  const jsonUrl = String(config.json_url || "").trim();
+  const jsonField = String(config.json_field || "ip").trim();
+  if (!jsonUrl) {
+    throw new Error('json_url fehlt in ip.yml');
   }
 
-  async function toggleTeamLinksByEnabledMembers() {
-    const helperLink = document.getElementById("helper-group-link");
-    const azubisLink = document.getElementById("azubis-group-link");
-    const wrapper = document.getElementById("team-group-links");
-    if (!helperLink || !azubisLink || !wrapper) return;
-
-    const [helpers, azubis] = await Promise.all([
-      loadYamlList("/userpages/helper/helper.yml"),
-      loadYamlList("/userpages/azubis/azubis.yml")
-    ]);
-
-    const helperCount = helpers.filter((entry) => entry && entry.enabled !== false).length;
-    const azubisCount = azubis.filter((entry) => entry && entry.enabled !== false).length;
-
-    if (helperCount === 0) {
-      helperLink.style.display = "none";
-    }
-    if (azubisCount === 0) {
-      azubisLink.style.display = "none";
-    }
-    if (helperCount === 0 && azubisCount === 0) {
-      wrapper.style.display = "none";
-    }
+  const res = await fetch(jsonUrl, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error('json_url antwortet mit HTTP ' + res.status);
   }
 
-  toggleTeamLinksByEnabledMembers().catch((err) => console.error("[index teams] Fehler:", err));
+  const data = await res.json();
+  const value = data && typeof data[jsonField] === "string" ? data[jsonField].trim() : "";
+  if (!value) {
+    throw new Error('json_field "' + jsonField + '" ist leer oder fehlt');
+  }
+  return value;
+}
+
+function resolveIpFromFixed(config) {
+  const fixedIp = String(config.fixed_ip || "").trim();
+  return fixedIp;
+}
+
+function resolveIpFromDomain(config) {
+  const domain = String(config.domain || "").trim();
+  return domain;
+}
+
+async function resolveIpValue() {
+  const config = await loadIpConfig();
+  const source = normalizeIpSource(config.ip_source);
+  if (source === "fixed") return resolveIpFromFixed(config);
+  if (source === "domain") return resolveIpFromDomain(config);
+  return resolveIpFromJson(config);
+}
+
+$(document).ready(function() {
+  setCopyEnabled(false);
+  loadCurrentIp();
+
+  $('.main1_ipcopier').click(function() {
+    if (!window.CURRENT_IP) return;
+    var popup = $('<div>', { class: 'main1_popup' }).append($('<h3 class="copy_confirm">').text('IP in die Zwischenablage kopiert'));
+    $(this).after(popup);
+    setTimeout(function() { popup.remove(); }, 1000);
+  });
+
+  const scrollLinks = document.querySelectorAll('.scroll');
+  scrollLinks.forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      const href = link.getAttribute('href') || '';
+      const hashIndex = href.indexOf('#');
+      if (hashIndex === -1) return;
+
+      const hash = href.slice(hashIndex);
+      const target = document.querySelector(hash);
+      if (!target) return;
+
+      event.preventDefault();
+      const offsetTop = target.offsetTop;
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    });
+  });
+});
 </script>
+
+<script src="media/discord-widget.js"></script>
+<script src="userpages/users.js"></script>
 </body>
 </html>

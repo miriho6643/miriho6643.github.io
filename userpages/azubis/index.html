@@ -10,25 +10,25 @@
   <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body data-group-id="azubis">
 
 <nav class="desktop_navbar">
-  <a href="../../index.html"><img class="desktop_navbar_logo_img" src="../../media/logo_small.png" alt="Logo"></a>
-  <a href="../../wiki/" class="desktop_navbar_link">Wiki</a>
-  <a href="../../index.html#discord" class="desktop_navbar_link">Community</a>
-  <a href="../../index.html#about" class="desktop_navbar_link">Ueber uns</a>
+  <a href="/"><img class="desktop_navbar_logo_img" src="../../media/logo_small.png" alt="Logo"></a>
+  <a href="/wiki/" class="desktop_navbar_link">Wiki</a>
+  <a href="/#discord" class="desktop_navbar_link">Community</a>
+  <a href="/#about" class="desktop_navbar_link">Ueber uns</a>
   <div class="desktop_navbar_link2_div">
-      <a href="../../index.html#join" class="desktop_navbar_link2">Mitspielen!</a>
+      <a href="/#join" class="desktop_navbar_link2">Mitspielen!</a>
   </div>
 </nav>
 
 <div class="mobile_navbar">
-  <a href="../../index.html" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="../../media/logo_small.png" alt="Logo"></a>
+  <a href="/" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="../../media/logo_small.png" alt="Logo"></a>
   <div id="mobile_navbar_links">
-      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="../../wiki/index.html">Wiki</a>
-      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="../../index.html#discord">Community</a>
-      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="../../index.html#about">Ueber uns</a>
-      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="../../index.html#join">Mitspielen!</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/wiki/">Wiki</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/#discord">Community</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/#about">Ueber uns</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/#join">Mitspielen!</a>
   </div>
   <div class="icon" onclick="mobile_navbar_link_hider()">
       <i class="fa fa-bars"></i>
@@ -36,23 +36,21 @@
 </div>
 
 <script>
-  function mobile_navbar_link_hider() {
-    var x = document.getElementById("mobile_navbar_links");
-    if (x.style.display === "flex") {
-        x.style.display = "none";
-    } else {
-        x.style.display = "flex";
-    }
+function mobile_navbar_link_hider() {
+  var x = document.getElementById("mobile_navbar_links");
+  if (x.style.display === "flex") {
+      x.style.display = "none";
+  } else {
+      x.style.display = "flex";
   }
+}
 </script>
 
 <div class="mainflex">
   <section class="team_collection">
     <a class="headline">Azubis</a>
-    <p class="team_collection_intro">
-      Azubis lernen aktuell und koennen spaeter zu Helpern werden.
-    </p>
-    <div id="azubis-root" class="team_collection_grid"></div>
+    <p class="team_collection_intro">Azubis lernen aktuell und koennen spaeter zu Helpern werden.</p>
+    <div id="team-root" class="team_collection_grid"></div>
   </section>
 </div>
 
@@ -61,7 +59,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-<script src="azubis.js"></script>
+<script src="../group.js"></script>
 
 </body>
 </html>

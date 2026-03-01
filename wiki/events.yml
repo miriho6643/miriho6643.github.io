@@ -1,0 +1,8 @@
+events:
+  - title: "Community Event"
+    description: "Treffen auf dem Server mit kleinen Minigames."
+    datetime: "2026-03-15T19:00:00"
+
+  - title: "Build Wettbewerb"
+    description: "Themenbau mit Voting in der Community."
+    datetime: "2026-03-22T18:30:00"
