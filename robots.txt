@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://miriho6643.github.io/sitemap.xml

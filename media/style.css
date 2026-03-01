@@ -939,7 +939,15 @@ body {
         margin-bottom: 2rem;
     }
     .main1_ipcopier {
-        display: none;
+        display: inline-block;
+        font-size: 1.25rem;
+        padding: .7rem 1.1rem;
+    }
+    .main1_ipcopier_text1 {
+        font-size: 1.25rem;
+    }
+    .main1_ipcopier_text2 {
+        font-size: 1rem;
     }
     .main5_admins_img {
         align-self: center;
