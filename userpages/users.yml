@@ -7,16 +7,18 @@ team_groups:
   - id: "helper"
     title: "Helper Team"
     rank_label: "[Helper]"
-    description: "Hilft in bestimmten Bereichen. Zur Sammelseite."
+    description: "Helfen in bestimmten Bereichen."
     image: "/media/member_placeholder.webp"
+    image_enabled: false
     link: "/userpages/helper/"
     order: 1
     enabled: true
   - id: "azubis"
     title: "Azubi Team"
     rank_label: "[Azubis]"
-    description: "Lernen aktuell und können später Helper werden. Zur Sammelseite."
+    description: "Lernen aktuell und können später Helper werden."
     image: "/media/member_placeholder.webp"
+    image_enabled: false
     link: "/userpages/azubis/"
     order: 2
     enabled: true
@@ -57,7 +59,7 @@ members:
     rank_label: "[Admin]"
     rank_class: "main5_admins_description_rank_admin"
     role: "Admin"
-    short_description: "Administrator und Moderator"
+    short_description: "Administrator"
     subtitle: "Biografie"
     bio: "Er heisst nicht Max!!!"
     avatar: "/media/member_placeholder.webp"
@@ -77,7 +79,7 @@ members:
     rank_label: "[Dev]"
     rank_class: "main5_admins_description_rank_admin"
     role: "Developer"
-    short_description: "Developer und Moderator"
+    short_description: "Developer"
     subtitle: "Biografie"
     bio: "Ich heisse nicht Max!!!"
     avatar: "/media/member_placeholder.webp"
@@ -96,17 +98,17 @@ members:
 
   - id: "jwave"
     name: "JWave"
-    rank_label: "[Azubi]"
-    role: "Azubi"
-    category: "Developer Azubi"
-    short_description: "Lernt aktuell Development und Community-Basics."
+    rank_label: "[Helper]"
+    role: "Helper"
+    category: "Preview Helper"
+    short_description: "Testet neue Funktionen vorab und gibt Feedback aus Nutzersicht."
     subtitle: "Profil"
-    bio: "Lernt aktuell Development und Community-Basics."
-    avatar: "/media/member_placeholder.webp"
-    group: "azubis"
-    order: 20
-    enabled: false
-    profile_enabled: false
+    bio: "Testet neue Funktionen vorab und gibt Feedback aus Nutzersicht."
+    avatar: "/media/jwave.png"
+    group: "helper"
+    order: 10
+    enabled: true
+    profile_enabled: true
 
   - id: "derkomischefabi"
     name: "DerKomischeFabi"
@@ -118,6 +120,6 @@ members:
     bio: "Lernt aktuell Development und Community-Basics."
     avatar: "/media/member_placeholder.webp"
     group: "azubis"
-    order: 21
+    order: 20
     enabled: false
     profile_enabled: false

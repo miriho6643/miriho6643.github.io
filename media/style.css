@@ -533,7 +533,7 @@ body {
 
 .main5_supporters_div {
     width: min(46rem, calc(100% - 2rem));
-    min-height: 18rem;
+    min-height: 0;
     background-color: var(--background1);
     border-radius: var(--roundness);
     border: 1px solid transparent;
@@ -543,6 +543,10 @@ body {
     align-items: center;
     box-sizing: border-box;
     padding: 0 1rem;
+}
+
+.main5_group_link_with_image {
+    min-height: 18rem;
 }
 .main5_group_link {
     text-decoration: none;
@@ -572,6 +576,34 @@ body {
     max-width: 60%;
     padding: 2rem 1rem;
     flex-direction: column;
+}
+
+.main5_group_link_no_image .main5_supporters_description_div {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+.main5_supporters_div.main5_group_link_no_image {
+    display: block;
+    min-height: auto !important;
+    height: auto !important;
+    padding: 1.25rem 2rem;
+}
+
+.main5_group_link_no_image .main5_supporters_description_div {
+    display: block;
+}
+
+.main5_group_link_no_image .main5_supporters_description_rank,
+.main5_group_link_no_image .main5_supporters_description_title,
+.main5_group_link_no_image .main5_supporters_description {
+    display: block;
+    text-align: center;
+}
+
+.main5_group_link_no_image .main5_supporters_description {
+    margin-bottom: 0;
 }
 .main5_supporters_description_rank {
     text-align: center;

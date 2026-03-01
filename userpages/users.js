@@ -99,32 +99,72 @@ function createGroupCard(group) {
   card.className = "main5_supporters_div main5_group_link";
   card.href = group.link || `/userpages/${group.id || ""}/`;
   card.style.setProperty("--rank-glow", group.glow_color || "#00d8ff");
-
-  const image = document.createElement("img");
-  image.className = "main5_supporters_img";
-  image.alt = `${group.title || "Team"} Bild`;
-  image.src = group.image || "/media/member_placeholder.webp";
+  const imageEnabled = group.image_enabled !== false;
+  if (!imageEnabled) {
+    card.classList.add("main5_group_link_no_image");
+    card.style.minHeight = "auto";
+    card.style.height = "auto";
+    card.style.width = "min(36rem, calc(100% - 2rem))";
+    card.style.padding = "0.4rem 0.85rem";
+    card.style.display = "block";
+  } else {
+    card.classList.add("main5_group_link_with_image");
+  }
+  if (imageEnabled) {
+    const image = document.createElement("img");
+    image.className = "main5_supporters_img";
+    image.alt = `${group.title || "Team"} Bild`;
+    image.src = group.image || "/media/member_placeholder.webp";
+    card.appendChild(image);
+  }
 
   const wrap = document.createElement("div");
   wrap.className = "main5_supporters_description_div";
+  if (!imageEnabled) {
+    wrap.style.width = "100%";
+    wrap.style.maxWidth = "100%";
+    wrap.style.padding = "0";
+    wrap.style.display = "flex";
+    wrap.style.flexDirection = "column";
+    wrap.style.justifyContent = "center";
+    wrap.style.gap = "0.05rem";
+  }
 
   const rank = document.createElement("span");
   rank.className = "main5_supporters_description_rank main5_supporters_description_rank_supporter";
   rank.textContent = group.rank_label || "[Team]";
+  if (!imageEnabled) {
+    rank.style.display = "block";
+    rank.style.textAlign = "center";
+    rank.style.fontSize = "1rem";
+    rank.style.marginBottom = "0";
+  }
 
   const title = document.createElement("span");
   title.className = "main5_supporters_description_title";
   title.textContent = group.title || group.id || "Team";
+  if (!imageEnabled) {
+    title.style.display = "block";
+    title.style.textAlign = "center";
+    title.style.fontSize = "1.15rem";
+    title.style.marginBottom = "0";
+  }
 
   const desc = document.createElement("span");
   desc.className = "main5_supporters_description";
   desc.textContent = group.description || "";
+  if (!imageEnabled) {
+    desc.style.display = "block";
+    desc.style.textAlign = "center";
+    desc.style.marginBottom = "0";
+    desc.style.fontSize = "1rem";
+    desc.style.lineHeight = "1.2";
+  }
 
   wrap.appendChild(rank);
   wrap.appendChild(title);
   wrap.appendChild(desc);
 
-  card.appendChild(image);
   card.appendChild(wrap);
   return card;
 }
