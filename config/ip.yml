@@ -1,4 +1,4 @@
-ip_source: "json"
+ip_source: "fixed"
 # Erlaubte Werte: "json", "fixed", "domain"
 
 # Bei ip_source: "json"
@@ -6,7 +6,7 @@ json_url: "https://json.extendsclass.com/bin/948068a1fd08"
 json_field: "ip"
 
 # Bei ip_source: "fixed"
-fixed_ip: ""
+fixed_ip: "Noch keine ip eingetragen"
 
 # Bei ip_source: "domain"
 domain: ""
