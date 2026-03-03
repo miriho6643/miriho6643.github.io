@@ -20,23 +20,25 @@
       const img = document.createElement("img");
       img.className = "discord-widget__icon";
       img.alt = "Server Icon";
-      img.src = "https://cdn.discordapp.com/icons/" + data.id + "/" + data.icon + ".png?size=128";
+      img.src =
+        "https://cdn.discordapp.com/icons/" +
+        data.id +
+        "/" +
+        data.icon +
+        ".png?size=128";
       return img;
     }
 
     const fallback = document.createElement("div");
-    fallback.className = "discord-widget__icon discord-widget__icon--fallback";
+    fallback.className =
+      "discord-widget__icon discord-widget__icon--fallback";
     fallback.textContent = (data.name || "D").trim().slice(0, 2).toUpperCase();
     return fallback;
   }
 
-  function getMembers(data) {
-    if (!Array.isArray(data.members)) return [];
-    return data.members.slice();
-  }
-
   function onlineMembers(data) {
-    return getMembers(data).filter(function (member) {
+    if (!Array.isArray(data.members)) return [];
+    return data.members.filter(function (member) {
       return member && member.status && member.status !== "offline";
     });
   }
@@ -77,7 +79,8 @@
     status.className = "discord-widget__member-status";
 
     const dot = document.createElement("span");
-    dot.className = "discord-widget__status-dot " + statusClass(member.status);
+    dot.className =
+      "discord-widget__status-dot " + statusClass(member.status);
     status.appendChild(dot);
 
     const label = document.createElement("span");
@@ -86,6 +89,7 @@
 
     text.appendChild(status);
     row.appendChild(text);
+
     return row;
   }
 
@@ -101,23 +105,30 @@
     title.className = "discord-widget__title";
     title.textContent = data.name || "Discord Server";
     row.appendChild(title);
+
     host.appendChild(row);
 
     const meta = document.createElement("div");
     meta.className = "discord-widget__meta";
 
     const onlineNow = onlineMembers(data);
-    const allMembers = getMembers(data);
-    const memberCount = typeof data.member_count === "number" ? data.member_count : allMembers.length;
 
     const online = document.createElement("div");
     online.className = "discord-widget__stat";
-    online.innerHTML = '<div class="discord-widget__stat-label">Online</div><div class="discord-widget__stat-value">' + formatNumber(data.presence_count || onlineNow.length) + "</div>";
+    online.innerHTML =
+      '<div class="discord-widget__stat-label">Online</div>' +
+      '<div class="discord-widget__stat-value">' +
+      formatNumber(data.presence_count || onlineNow.length) +
+      "</div>";
     meta.appendChild(online);
 
     const members = document.createElement("div");
     members.className = "discord-widget__stat";
-    members.innerHTML = '<div class="discord-widget__stat-label">Mitglieder</div><div class="discord-widget__stat-value">' + formatNumber(memberCount) + "</div>";
+    members.innerHTML =
+      '<div class="discord-widget__stat-label">Mitglieder</div>' +
+      '<div class="discord-widget__stat-value">' +
+      formatNumber(data.member_count) +
+      "</div>";
     meta.appendChild(members);
 
     host.appendChild(meta);
@@ -138,9 +149,11 @@
     } else {
       const list = document.createElement("div");
       list.className = "discord-widget__members-list";
+
       onlineNow.slice(0, 8).forEach(function (member) {
         list.appendChild(createMemberRow(member));
       });
+
       listSection.appendChild(list);
     }
 
@@ -150,12 +163,14 @@
     if (inviteUrl) {
       const actions = document.createElement("div");
       actions.className = "discord-widget__actions";
+
       const join = document.createElement("a");
       join.className = "discord-widget__join";
       join.href = inviteUrl;
       join.target = "_blank";
       join.rel = "noopener noreferrer nofollow";
       join.textContent = "Server beitreten";
+
       actions.appendChild(join);
       host.appendChild(actions);
     }
@@ -164,14 +179,17 @@
   function renderError(host) {
     host.classList.add("discord-widget--error");
     host.innerHTML = "";
+
     const state = document.createElement("p");
     state.className = "discord-widget__state";
     state.textContent = "Discord Widget konnte nicht geladen werden.";
+
     host.appendChild(state);
   }
 
   async function loadWidget(host) {
     const serverId = host.dataset.serverId;
+
     if (!serverId) {
       renderError(host);
       return;
@@ -180,13 +198,19 @@
     createBaseMarkup(host);
 
     try {
-      const url = "https://discord.com/api/guilds/" + encodeURIComponent(serverId) + "/widget.json";
+      const url =
+        "https://discord.com/api/guilds/" +
+        encodeURIComponent(serverId) +
+        "/widget.json";
+
       const res = await fetch(url, { cache: "no-store" });
+
       if (!res.ok) {
         throw new Error("HTTP " + res.status);
       }
 
       const data = await res.json();
+
       renderData(host, data);
     } catch (err) {
       console.error("[discord-widget] Fehler:", err);
@@ -196,10 +220,14 @@
 
   async function init(container) {
     const root = container || document;
-    const widgets = root.querySelectorAll(".tile.discord-widget[data-server-id]");
+
+    const widgets = root.querySelectorAll(
+      ".tile.discord-widget[data-server-id]"
+    );
+
     const jobs = [];
 
-    widgets.forEach((widget) => {
+    widgets.forEach(function (widget) {
       jobs.push(loadWidget(widget));
     });
 
