@@ -344,7 +344,6 @@ body {
     width: 100%;
     height: 50%;
     object-fit: cover;
-    border-radius: var(--roundness);
 }
 
 .main2_feature_headline {
