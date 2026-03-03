@@ -55,7 +55,6 @@ function createLinkCard(entry) {
     width: `${iconSize}px`,
     height: `${iconSize}px`,
     objectFit: "cover",
-    borderRadius: `${Number(pick(entry, "iconRadius", 20))}px`,
     backgroundColor: pick(entry, "iconBackground", "transparent"),
     padding: `${Number(pick(entry, "iconPadding", 0))}px`,
     filter: entry.photo ? "none" : pick(entry, "iconFilter", "invert(1)"),
