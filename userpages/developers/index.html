@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devs - Team Übersicht</title>
+  <link rel="icon" type="image/png" href="../../media/favicon.png">
+  <link rel="stylesheet" href="../../media/style.css">
+  <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body data-group-id="azubis">
+
+<nav class="desktop_navbar">
+  <a href="/"><img class="desktop_navbar_logo_img" src="../../media/logo_small.png" alt="Logo"></a>
+  <a href="/wiki/" class="desktop_navbar_link">Wiki</a>
+  <a href="/#discord" class="desktop_navbar_link">Community</a>
+  <a href="/#about" class="desktop_navbar_link">Über uns</a>
+  <div class="desktop_navbar_link2_div">
+      <a href="/#join" class="desktop_navbar_link2">Mitspielen!</a>
+  </div>
+</nav>
+
+<div class="mobile_navbar">
+  <a href="/" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="../../media/logo_small.png" alt="Logo"></a>
+  <div id="mobile_navbar_links">
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/wiki/">Wiki</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/#discord">Community</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/#about">Über uns</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/#join">Mitspielen!</a>
+  </div>
+  <div class="icon" onclick="mobile_navbar_link_hider()">
+      <i class="fa fa-bars"></i>
+  </div>
+</div>
+
+<script>
+function mobile_navbar_link_hider() {
+  var x = document.getElementById("mobile_navbar_links");
+  if (x.style.display === "flex") {
+      x.style.display = "none";
+  } else {
+      x.style.display = "flex";
+  }
+}
+</script>
+
+<div class="mainflex">
+  <section class="team_collection">
+    <a class="headline">Developers</a>
+    <p class="team_collection_intro">Developers programmieren Webseiten/Bots/Apps und geben den Code an die Admins, welche diesen dann veröffentlichen.</p>
+    <div id="team-root" class="team_collection_grid"></div>
+  </section>
+</div>
+
+<footer class="copyright_div">
+  <a href="https://github.com/FQQD/MCServer-Web-Template" class="copyright">Erstellt von FQQD 2023 - Bearbeitet von Miriho6643 2025</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="../group.js"></script>
+
+</body>
+</html>
