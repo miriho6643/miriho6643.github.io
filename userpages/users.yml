@@ -4,6 +4,33 @@ settings:
   default_avatar: "/media/member_placeholder.webp"
 
 team_groups:
+  - id: "admins"
+    title: "Admin Team"
+    rank_label: "[Admins]"
+    description: "Halten die Webseite imstande und administrieren diverse Server."
+    image: "/media/member_placeholder.webp"
+    image_enabled: false
+    link: "/userpages/admins/"
+    order: 1
+    enabled: true
+  - id: "developers"
+    title: "Developer Team"
+    rank_label: "[Developers]"
+    description: "Programmieren die Webseite und jegliche Bots/Programme auf diversen Servern."
+    image: "/media/member_placeholder.webp"
+    image_enabled: false
+    link: "/userpages/developers/"
+    order: 2
+    enabled: true
+  - id: "Mods"
+    title: "Moderator Team"
+    rank_label: "[Mods]"
+    description: "Moderieren auf allen sozialen Platformen."
+    image: "/media/member_placeholder.webp"
+    image_enabled: false
+    link: "/userpages/mods/"
+    order: 3
+    enabled: true
   - id: "helper"
     title: "Helper Team"
     rank_label: "[Helper]"
@@ -11,7 +38,7 @@ team_groups:
     image: "/media/member_placeholder.webp"
     image_enabled: false
     link: "/userpages/helper/"
-    order: 1
+    order: 4
     enabled: true
   - id: "azubis"
     title: "Azubi Team"
@@ -20,7 +47,7 @@ team_groups:
     image: "/media/member_placeholder.webp"
     image_enabled: false
     link: "/userpages/azubis/"
-    order: 2
+    order: 5
     enabled: true
 
 members:
