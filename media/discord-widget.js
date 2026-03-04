@@ -103,24 +103,9 @@
     row.appendChild(title);
     host.appendChild(row);
 
-    const meta = document.createElement("div");
-    meta.className = "discord-widget__meta";
-
     const onlineNow = onlineMembers(data);
-    const allMembers = getMembers(data);
-    const memberCount = typeof data.member_count === "number" ? data.member_count : allMembers.length;
-
-    const online = document.createElement("div");
-    online.className = "discord-widget__stat";
-    online.innerHTML = '<div class="discord-widget__stat-label">Online</div><div class="discord-widget__stat-value">' + formatNumber(data.presence_count || onlineNow.length) + "</div>";
-    meta.appendChild(online);
-
-    const members = document.createElement("div");
-    members.className = "discord-widget__stat";
-    members.innerHTML = '<div class="discord-widget__stat-label">Mitglieder</div><div class="discord-widget__stat-value">' + formatNumber(memberCount) + "</div>";
-    meta.appendChild(members);
-
-    host.appendChild(meta);
+    const hasPresenceCount = typeof data.presence_count === "number" && !Number.isNaN(data.presence_count);
+    const onlineCount = hasPresenceCount ? data.presence_count : onlineNow.length;
 
     const listSection = document.createElement("div");
     listSection.className = "discord-widget__members";
@@ -147,9 +132,15 @@
     host.appendChild(listSection);
 
     const inviteUrl = data.instant_invite || host.dataset.inviteUrl || "";
+    const actions = document.createElement("div");
+    actions.className = "discord-widget__actions";
+
+    const onlineBadge = document.createElement("div");
+    onlineBadge.className = "discord-widget__online-badge";
+    onlineBadge.innerHTML = '<span class="discord-widget__online-dot"></span><span>Online: ' + formatNumber(onlineCount) + "</span>";
+    actions.appendChild(onlineBadge);
+
     if (inviteUrl) {
-      const actions = document.createElement("div");
-      actions.className = "discord-widget__actions";
       const join = document.createElement("a");
       join.className = "discord-widget__join";
       join.href = inviteUrl;
@@ -157,8 +148,9 @@
       join.rel = "noopener noreferrer nofollow";
       join.textContent = "Server beitreten";
       actions.appendChild(join);
-      host.appendChild(actions);
     }
+
+    host.appendChild(actions);
   }
 
   function renderError(host) {

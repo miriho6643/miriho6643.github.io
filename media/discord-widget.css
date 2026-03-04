@@ -80,6 +80,8 @@
     margin-top: 1rem;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: .6rem;
 }
 
 .discord-widget__join {
@@ -174,8 +176,8 @@
 }
 
 .discord-widget__status-dot {
-    width: .58rem;
-    height: .58rem;
+    width: .72rem;
+    height: .72rem;
     border-radius: 50%;
     display: inline-block;
     flex: 0 0 auto;
@@ -219,4 +221,28 @@
     .discord-widget__meta {
         grid-template-columns: 1fr;
     }
+}
+
+
+
+.discord-widget__online-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .65rem 1rem;
+    border-radius: var(--roundness);
+    border: var(--discord-border);
+    background: #1e1f22;
+    color: var(--discord-text-muted);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.discord-widget__online-dot {
+    width: .72rem;
+    height: .72rem;
+    border-radius: 50%;
+    background: #23a55a;
+    box-shadow: 0 0 0 rgba(35, 165, 90, 0.7);
+    animation: discord-online-pulse 1.8s infinite;
 }
