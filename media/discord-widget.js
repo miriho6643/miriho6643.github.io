@@ -120,17 +120,8 @@
       '<div class="discord-widget__stat-value">' +
       formatNumber(data.presence_count || onlineNow.length) +
       "</div>";
+
     meta.appendChild(online);
-
-    const members = document.createElement("div");
-    members.className = "discord-widget__stat";
-    members.innerHTML =
-      '<div class="discord-widget__stat-label">Mitglieder</div>' +
-      '<div class="discord-widget__stat-value">' +
-      formatNumber(data.member_count) +
-      "</div>";
-    meta.appendChild(members);
-
     host.appendChild(meta);
 
     const listSection = document.createElement("div");
