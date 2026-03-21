@@ -49,3 +49,16 @@
   iconRadius: 0
   order: 4
   enabled: true
+
+- id: patreon
+  label: "Patreon"
+  subtitle: "Hier findest du mich online."
+  url: "https://patreon.com/miriho6643"
+  icon: "patreon.svg"
+  accentColor: "#5865F2"
+  cardBackground: "var(--background2)"
+  titleColor: "#ffffff"
+  subtitleColor: "#d6d6d6"
+  iconRadius: 0
+  order: 5
+  enabled: true
