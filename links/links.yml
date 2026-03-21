@@ -58,7 +58,7 @@
   accentColor: "#FFFFFF"
   cardBackground: "var(--background2)"
   titleColor: "#ffffff"
-  subtitleColor: "#f96854"
+  subtitleColor: "#d6d6d6"
   iconRadius: 0
   order: 5
   enabled: true
