@@ -42,7 +42,7 @@
   subtitle: "Hier findest du mich online."
   url: "https://github.com/miriho6643"
   icon: "github.svg"
-  accentColor: "#238636"
+  accentColor: "#FFFFFF"
   cardBackground: "var(--background2)"
   titleColor: "#ffffff"
   subtitleColor: "#d6d6d6"
