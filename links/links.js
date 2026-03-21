@@ -136,3 +136,6 @@ async function initLinksPage() {
 }
 
 initLinksPage().catch((err) => console.error("[links.js] Fehler:", err));
+
+// Copyright CityBuilderBot Alle Rechte Vorbehalten
+
