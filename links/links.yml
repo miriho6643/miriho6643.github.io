@@ -55,7 +55,7 @@
   subtitle: "Hier findest du mich online."
   url: "https://patreon.com/miriho6643"
   icon: "patreon.svg"
-  accentColor: "#5865F2"
+  accentColor: "#FFFFFF"
   cardBackground: "var(--background2)"
   titleColor: "#ffffff"
   subtitleColor: "#d6d6d6"
