@@ -1,71 +1,148 @@
-// ===============================
-// GLOBAL JS FÜR BUTTONS & LINKS
-// ===============================
+const YAML_CONFIG_PATH = "links.yml";
+const ICON_BASE_PATH = "icons/";
 
-document.addEventListener('DOMContentLoaded', () => {
-
-    // -------------------
-    // IP-Kopier-Buttons
-    // -------------------
-    document.querySelectorAll('.main1_ipcopier').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.stopPropagation(); // verhindert, dass Klicks auf Elterncontainer durchgehen
-            const ip = button.dataset.ip || button.innerText; // IP aus data-Attribut oder Text
-            navigator.clipboard.writeText(ip).then(() => {
-                showPopup(button, 'IP kopiert!');
-            }).catch(() => {
-                showPopup(button, 'Fehler beim Kopieren');
-            });
-        });
-    });
-
-    // -------------------
-    // Mobile Navbar Toggle
-    // -------------------
-    const mobileIcon = document.querySelector('.mobile_navbar .icon');
-    const mobileLinks = document.getElementById('mobile_navbar_links');
-    if (mobileIcon && mobileLinks) {
-        mobileIcon.addEventListener('click', () => {
-            mobileLinks.style.display = mobileLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-    }
-
-    // -------------------
-    // Klickschutz auf graue Flächen
-    // -------------------
-    // Nur echte Buttons/Links reagieren, graue Hintergründe nicht
-    const clickableSelectors = [
-        '.main5_admins_clickable',
-        '.main5_group_link',
-        '.main1_ipcopier'
-    ];
-
-    clickableSelectors.forEach(selector => {
-        document.querySelectorAll(selector).forEach(el => {
-            el.addEventListener('click', e => {
-                e.stopPropagation(); // nur auf diesen Link reagieren
-            });
-        });
-    });
-
-});
-
-// -------------------
-// Popup-Funktion
-// -------------------
-function showPopup(button, message) {
-    // Vorhandene Popup entfernen
-    const existingPopup = button.querySelector('.main1_popup');
-    if (existingPopup) existingPopup.remove();
-
-    const popup = document.createElement('div');
-    popup.classList.add('main1_popup');
-    popup.innerText = message;
-
-    // Position: immer über dem Button
-    button.appendChild(popup);
-
-    setTimeout(() => {
-        popup.remove();
-    }, 2000);
+function pick(entry, key, fallback) {
+  const value = entry[key];
+  return value === undefined || value === null || value === "" ? fallback : value;
 }
+
+async function loadYamlConfig() {
+  const res = await fetch(YAML_CONFIG_PATH, { cache: "no-store" });
+  if (!res.ok) {
+    throw new Error("Konnte links.yml nicht laden: " + res.status);
+  }
+  return jsyaml.load(await res.text());
+}
+
+function createLinkCard(entry) {
+  const accent = pick(entry, "accentColor", "var(--accent1)");
+  const cardBackground = pick(entry, "cardBackground", "var(--background2)");
+  const titleColor = pick(entry, "titleColor", "#ffffff");
+  const subtitleColor = pick(entry, "subtitleColor", "#d6d6d6");
+  const iconSize = Number(pick(entry, "iconSize", 64));
+
+  // wrapper ist jetzt ein DIV, nicht anklickbar, nur Card selbst
+  const wrapper = document.createElement("div");
+  wrapper.style.width = "100%";
+  wrapper.style.display = "flex";
+  wrapper.style.justifyContent = "center";
+  wrapper.style.pointerEvents = "none"; // grauer Bereich nicht klickbar
+
+  const card = document.createElement("a"); // Card selbst ist der Link
+  card.href = entry.url;
+  card.target = "_blank";
+  card.rel = "noopener noreferrer";
+  card.style.pointerEvents = "auto"; // nur Card anklickbar
+  Object.assign(card.style, {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: "32px",
+    padding: "22px 44px",
+    borderRadius: "20px",
+    maxWidth: "880px",
+    width: "100%",
+    minHeight: "120px",
+    backgroundColor: cardBackground,
+    border: `1px solid ${pick(entry, "borderColor", "rgba(255,255,255,0.08)")}`,
+    boxShadow: "0 10px 28px rgba(0,0,0,0.6)",
+    transition: "all 0.2s ease",
+    textDecoration: "none",
+    color: "inherit"
+  });
+
+  const icon = document.createElement("img");
+  icon.src = entry.photo || (ICON_BASE_PATH + entry.icon);
+  icon.alt = entry.label;
+  Object.assign(icon.style, {
+    width: `${iconSize}px`,
+    height: `${iconSize}px`,
+    objectFit: "cover",
+    backgroundColor: pick(entry, "iconBackground", "transparent"),
+    borderRadius: `${Number(pick(entry, "iconRadius", 20))}px`,
+    padding: `${Number(pick(entry, "iconPadding", 0))}px`,
+    filter: entry.photo ? "none" : pick(entry, "iconFilter", "invert(1)"),
+    transition: "all 0.2s ease"
+  });
+
+  const textWrapper = document.createElement("div");
+  Object.assign(textWrapper.style, {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  });
+
+  const title = document.createElement("div");
+  title.textContent = entry.label;
+  Object.assign(title.style, {
+    fontSize: "28px",
+    fontWeight: "600",
+    color: titleColor
+  });
+
+  const subtitle = document.createElement("div");
+  subtitle.textContent = entry.subtitle || entry.url;
+  Object.assign(subtitle.style, {
+    fontSize: "17px",
+    color: subtitleColor
+  });
+
+  textWrapper.appendChild(title);
+  textWrapper.appendChild(subtitle);
+  card.appendChild(icon);
+  card.appendChild(textWrapper);
+  wrapper.appendChild(card);
+
+  card.addEventListener("mouseenter", () => {
+    card.style.border = `2px solid ${accent}`;
+    card.style.boxShadow = `0 0 12px ${accent}, 0 0 28px ${accent}, 0 0 50px ${accent}`;
+    card.style.transform = "translateY(-4px)";
+    if (!entry.photo) {
+      icon.style.filter = `invert(1) drop-shadow(0 0 6px ${accent}) drop-shadow(0 0 14px ${accent})`;
+    }
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.border = `1px solid ${pick(entry, "borderColor", "rgba(255,255,255,0.08)")}`;
+    card.style.boxShadow = "0 10px 28px rgba(0,0,0,0.6)";
+    card.style.transform = "translateY(0)";
+    if (!entry.photo) {
+      icon.style.filter = pick(entry, "iconFilter", "invert(1)");
+    }
+  });
+
+  return wrapper;
+}
+
+async function initLinksPage() {
+  const root = document.getElementById("links-root");
+  if (!root) return;
+
+  Object.assign(root.style, {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "24px",
+    paddingTop: "120px",
+    paddingBottom: "120px",
+    flex: "1" // sorgt dafür, dass Footer unten bleibt
+  });
+
+  const config = await loadYamlConfig();
+  const entries = Array.isArray(config) ? config : [];
+
+  entries
+    .filter((e) => e.enabled !== false)
+    .sort((a, b) => (a.order || 0) - (b.order || 0))
+    .forEach((entry) => {
+      root.appendChild(createLinkCard(entry));
+    });
+
+  // Footer Fix: immer unten
+  const footer = document.querySelector(".copyright_div");
+  if (footer) {
+    footer.style.marginTop = "auto";
+  }
+}
+
+initLinksPage().catch((err) => console.error("[links.js] Fehler:", err));
