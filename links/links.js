@@ -2,13 +2,14 @@
 // GLOBAL JS FÜR BUTTONS & LINKS
 // ===============================
 
-// -------------------
-// IP Kopier-Buttons
-// -------------------
 document.addEventListener('DOMContentLoaded', () => {
+
+    // -------------------
+    // IP-Kopier-Buttons
+    // -------------------
     document.querySelectorAll('.main1_ipcopier').forEach(button => {
         button.addEventListener('click', (e) => {
-            e.stopPropagation(); // Verhindert Klicks auf Eltern-Container
+            e.stopPropagation(); // verhindert, dass Klicks auf Elterncontainer durchgehen
             const ip = button.dataset.ip || button.innerText; // IP aus data-Attribut oder Text
             navigator.clipboard.writeText(ip).then(() => {
                 showPopup(button, 'IP kopiert!');
@@ -30,14 +31,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------
-    // Nur Buttons klickbar, graues Umfeld nicht
+    // Klickschutz auf graue Flächen
     // -------------------
-    // Wenn du weitere klickbare Elemente hast, die nicht auf die ganze Karte reagieren sollen:
-    document.querySelectorAll('.main5_admins_clickable, .main5_group_link').forEach(el => {
-        el.addEventListener('click', (e) => {
-            e.stopPropagation(); // nur auf diesen Link reagieren
+    // Nur echte Buttons/Links reagieren, graue Hintergründe nicht
+    const clickableSelectors = [
+        '.main5_admins_clickable',
+        '.main5_group_link',
+        '.main1_ipcopier'
+    ];
+
+    clickableSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.addEventListener('click', e => {
+                e.stopPropagation(); // nur auf diesen Link reagieren
+            });
         });
     });
+
 });
 
 // -------------------
@@ -51,6 +61,8 @@ function showPopup(button, message) {
     const popup = document.createElement('div');
     popup.classList.add('main1_popup');
     popup.innerText = message;
+
+    // Position: immer über dem Button
     button.appendChild(popup);
 
     setTimeout(() => {
