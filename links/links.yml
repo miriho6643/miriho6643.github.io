@@ -53,7 +53,7 @@
 - id: patreon
   label: "Patreon"
   subtitle: "Hier findest du mich online."
-  url: "https://youtu.be/2qBlE2-WL60"
+  url: "https://patreon.com/miriho6643"
   icon: "patreon.svg"
   accentColor: "#FFFFFF"
   cardBackground: "var(--background2)"
