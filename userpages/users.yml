@@ -123,15 +123,15 @@ members:
       - label: "Discord"
         url: "https://discord.gg/Zq3mr83AJX"
 
-  - id: "jwave"
-    name: "JWave"
+  - id: "jonar"
+    name: "Jonar"
     rank_label: "[Helper]"
     role: "Helper"
     category: "Preview Helper"
     short_description: "Testet neue Funktionen vorab und gibt Feedback aus Nutzersicht."
     subtitle: "Profil"
     bio: "Testet neue Funktionen vorab und gibt Feedback aus Nutzersicht."
-    avatar: "/media/jwave.png"
+    avatar: "/media/jonar.png"
     group: "helper"
     order: 10
     enabled: true
