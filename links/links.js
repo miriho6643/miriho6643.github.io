@@ -96,7 +96,7 @@ function createLinkCard(entry) {
   card.addEventListener("mouseenter", () => {
     card.style.border = `2px solid ${accent}`;
     card.style.boxShadow = `0 0 12px ${accent}, 0 0 28px ${accent}, 0 0 50px ${accent}`;
-    card.style.transform = "translateY(-4px)";
+    card.style.transform = "translateY(0px)"; //das war translateY(-4px)
     if (!entry.photo) {
       icon.style.filter = `invert(1) drop-shadow(0 0 6px ${accent}) drop-shadow(0 0 14px ${accent})`;
     }
