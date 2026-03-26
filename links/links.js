@@ -124,7 +124,7 @@ async function initLinksPage() {
     alignItems: "center",
     gap: "24px",
     paddingTop: "120px",
-    paddingBottom: "120px",
+    paddingBottom: "20px",
     flex: "1" // sorgt dafür, dass Footer unten bleibt
   });
 
