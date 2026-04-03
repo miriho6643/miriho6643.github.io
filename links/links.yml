@@ -24,6 +24,19 @@
   order: 2
   enabled: true
 
+- id: youtube
+  label: "Youtube"
+  subtitle: "Hier findest du mich online."
+  url: "https://youtube.com/@Miriho6643YT"
+  icon: "youtube.svg"
+  accentColor: "#CD201F"
+  cardBackground: "var(--background2)"
+  titleColor: "#ffffff"
+  subtitleColor: "#d6d6d6"
+  iconRadius: 0
+  order: 3
+  enabled: true
+
 - id: whatsapp-kanal
   label: "Whatsapp Kanal"
   subtitle: "Hier findest du mich online."
@@ -34,7 +47,7 @@
   titleColor: "#ffffff"
   subtitleColor: "#d6d6d6"
   iconRadius: 0
-  order: 3
+  order: 4
   enabled: true
 
 - id: github
@@ -47,7 +60,7 @@
   titleColor: "#ffffff"
   subtitleColor: "#d6d6d6"
   iconRadius: 0
-  order: 4
+  order: 5
   enabled: true
 
 - id: patreon
@@ -60,5 +73,5 @@
   titleColor: "#ffffff"
   subtitleColor: "#d6d6d6"
   iconRadius: 0
-  order: 5
+  order: 6
   enabled: true
