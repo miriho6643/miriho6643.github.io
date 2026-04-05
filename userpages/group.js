@@ -59,7 +59,7 @@ async function initGroupPage() {
   if (!groupId) return;
 
   const config = await loadUsersConfig();
-  const defaultAvatar = (config.settings || {}).default_avatar || "/media/member_placeholder.webp";
+  const defaultAvatar = (config.settings || {}).default_avatar || "/media/user/member_placeholder.webp";
 
   const members = (config.members || [])
     .filter((entry) => entry && entry.enabled !== false && String(entry.group || "").toLowerCase() === String(groupId).toLowerCase())
