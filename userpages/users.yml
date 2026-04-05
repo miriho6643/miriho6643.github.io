@@ -8,7 +8,7 @@ team_groups:
     title: "Admin Team"
     rank_label: "[Admins]"
     description: "Halten die Webseite imstande und administrieren diverse Server."
-    image: "/media/member_placeholder.webp"
+    image: "/media/user/member_placeholder.webp"
     image_enabled: false
     link: "/userpages/admins/"
     order: 1
@@ -17,7 +17,7 @@ team_groups:
     title: "Developer Team"
     rank_label: "[Developers]"
     description: "Programmieren die Webseite und jegliche Bots/Programme auf diversen Servern."
-    image: "/media/member_placeholder.webp"
+    image: "/media/user/member_placeholder.webp"
     image_enabled: false
     link: "/userpages/developers/"
     order: 2
@@ -26,7 +26,7 @@ team_groups:
     title: "Moderator Team"
     rank_label: "[Mods]"
     description: "Moderieren auf allen sozialen Platformen."
-    image: "/media/member_placeholder.webp"
+    image: "/media/user/member_placeholder.webp"
     image_enabled: false
     link: "/userpages/mods/"
     order: 3
@@ -35,7 +35,7 @@ team_groups:
     title: "Helper Team"
     rank_label: "[Helper]"
     description: "Helfen in bestimmten Bereichen."
-    image: "/media/member_placeholder.webp"
+    image: "/media/user/member_placeholder.webp"
     image_enabled: false
     link: "/userpages/helper/"
     order: 4
@@ -44,7 +44,7 @@ team_groups:
     title: "Azubi Team"
     rank_label: "[Azubis]"
     description: "Lernen aktuell und können später Helper werden."
-    image: "/media/member_placeholder.webp"
+    image: "/media/user/member_placeholder.webp"
     image_enabled: false
     link: "/userpages/azubis/"
     order: 5
@@ -59,7 +59,7 @@ members:
     short_description: "Contentcreator und Owner"
     subtitle: "Biografie"
     bio: "Miriho6643 ist ein leidenschaftlicher Technik- und Spieleenthusiast, der schon früh eine große Neugier für die Funktionsweise digitaler Welten entwickelte. Schon mit zwei Jahren begann er, sich in kreative Sandbox-Spiele wie Scrap Mechanic zu vertiefen, und erweiterte sein Interesse kurze Zeit später auf Trailmakers, das er bis heute aktiv spielt und zu dem er alle DLCs besitzt. Besonders aktiv ist er in Minecraft, das einen Großteil seiner Freizeit einnimmt, und teilt seine Abenteuer regelmäßig beim Streaming mit einer wachsenden Community. Seine Faszination für Spiele führte ihn dazu, die Mechaniken hinter den digitalen Welten zu verstehen. Mit Unterstützung seines Vaters begann er, sich mit HTML und dem Einsatz eines Raspberry Pi auseinanderzusetzen. Schnell entwickelte er eigene Projekte und Skripte und entdeckte später Python als seine bevorzugte Programmiersprache. Heute verbindet Miriho6643 seine Kreativität mit technischem Know-how, experimentiert mit Künstlicher Intelligenz und teilt seine Projekte und Spielabenteuer aktiv online. Sein Werdegang zeigt eine bemerkenswerte Mischung aus spielerischer Exploration, technischem Interesse, autodidaktischem Lernen und Community-Engagement."
-    avatar: "/media/miriho6643.png"
+    avatar: "/media/user/miriho6643.png"
     group: "core"
     order: 1
     enabled: true
@@ -87,7 +87,7 @@ members:
     short_description: "Administrator"
     subtitle: "Biografie"
     bio: "Er heisst nicht Max!!!"
-    avatar: "/media/member_placeholder.webp"
+    avatar: "/media/user/member_placeholder.webp"
     group: "core"
     order: 2
     enabled: true
@@ -107,7 +107,7 @@ members:
     short_description: "Developer"
     subtitle: "Biografie"
     bio: "Ich heisse nicht Max!!!"
-    avatar: "/media/member_placeholder.webp"
+    avatar: "/media/user/member_placeholder.webp"
     group: "core"
     order: 3
     enabled: true
@@ -129,7 +129,7 @@ members:
     short_description: "Testet neue Funktionen vorab und gibt Feedback aus Nutzersicht."
     subtitle: "Profil"
     bio: "Testet neue Funktionen vorab und gibt Feedback aus Nutzersicht."
-    avatar: "/media/jonar.png"
+    avatar: "/media/user/jonar.png"
     group: "helper"
     order: 10
     enabled: true
@@ -143,7 +143,7 @@ members:
     short_description: "Lernt aktuell Development und Community-Basics."
     subtitle: "Profil"
     bio: "Lernt aktuell Development und Community-Basics."
-    avatar: "/media/member_placeholder.webp"
+    avatar: "/media/user/member_placeholder.webp"
     group: "azubis"
     order: 20
     enabled: false
