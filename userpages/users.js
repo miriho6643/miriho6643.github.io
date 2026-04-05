@@ -114,7 +114,7 @@ function createGroupCard(group) {
     const image = document.createElement("img");
     image.className = "main5_supporters_img";
     image.alt = `${group.title || "Team"} Bild`;
-    image.src = group.image || "/media/member_placeholder.webp";
+    image.src = group.image || "/media/user/member_placeholder.webp";
     card.appendChild(image);
   }
 
@@ -172,7 +172,7 @@ function createGroupCard(group) {
 function renderOverview(membersRoot, groupsRoot, config) {
   const settings = config.settings || {};
   const allMembers = enabledMembers(config);
-  const defaultAvatar = settings.default_avatar || "/media/member_placeholder.webp";
+  const defaultAvatar = settings.default_avatar || "/media/user/member_placeholder.webp";
   const coreMembers = allMembers.filter((m) => (m.group || "core") === "core").sort(byOrder);
 
   applyHomepageLayout(membersRoot, settings.homepage_layout);
@@ -206,7 +206,7 @@ function createProfileLink(link) {
 
 function renderProfile(member, config) {
   const settings = config.settings || {};
-  const defaultAvatar = settings.default_avatar || "/media/member_placeholder.webp";
+  const defaultAvatar = settings.default_avatar || "/media/user/member_placeholder.webp";
 
   const overview = document.getElementById("userpages-overview");
   const profile = document.getElementById("user-profile");
