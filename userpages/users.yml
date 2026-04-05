@@ -22,7 +22,7 @@ team_groups:
     link: "/userpages/developers/"
     order: 2
     enabled: true
-  - id: "Mods"
+  - id: "mods"
     title: "Moderator Team"
     rank_label: "[Mods]"
     description: "Moderieren auf allen sozialen Platformen."
