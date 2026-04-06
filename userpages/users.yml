@@ -1,7 +1,7 @@
 settings:
   homepage_layout: "column"
   card_radius_px: 20
-  default_avatar: "/media/member_placeholder.webp"
+  default_avatar: "/media/user/member_placeholder.webp"
 
 team_groups:
   - id: "admins"
