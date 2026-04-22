@@ -109,7 +109,7 @@ members:
     short_description: "Developer"
     subtitle: "Biografie"
     bio: "Ich heisse nicht Max!!!"
-    avatar: "/media/user/member_placeholder.webp"
+    avatar: "/media/user/CityBuilderBot.png"
     group: "core"
     order: 3
     enabled: true
