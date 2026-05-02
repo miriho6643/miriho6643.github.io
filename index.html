@@ -1,1 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miriho's Webseite</title>
 
+  <link rel="icon" href="/media/favicon.png">
+  <link rel="stylesheet" href="/media/style.css?v=20260301a">
+  <link rel="stylesheet" href="/media/discord-widget.css">
+  <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="desktop_navbar">
+  <a href="/"><img class="desktop_navbar_logo_img" src="/media/logo_small.png"></a>
+  <a href="/wiki/" class="desktop_navbar_link">Wiki</a>
+  <a href="#discord" class="desktop_navbar_link scroll">Community</a>
+  <a href="#about" class="desktop_navbar_link scroll">Über uns</a>
+  <a href="#join" class="desktop_navbar_link scroll">Join</a>
+</nav>
+
+<!-- HERO -->
+<div class="main1">
+  <img class="main1_logo" src="/media/logo.png">
+  <div class="main1_description">
+    <a class="main1_actcent">Willkommen</a><br>
+    <a>auf unserer Webseite</a>
+  </div>
+
+  <button id="copy-ip" onclick="copyText()">
+    <span data-ip-target>lädt...</span>
+  </button>
+</div>
+
+<!-- FEATURES -->
+<div class="main2">
+  <a class="headline">Features</a>
+</div>
+
+<!-- DISCORD -->
+<div id="discord" class="main4">
+  <a class="headline">Discord</a>
+  <div class="discord-widget" data-server-id="1398660969500246137"></div>
+</div>
+
+<!-- USER -->
+<div id="about" class="main5">
+  <a class="headline">Team</a>
+  <div id="main-team-members"></div>
+</div>
+
+<!-- VIDEOS -->
+<div class="main6">
+  <a class="headline">Neueste Videos</a>
+  <div id="yt-videos" class="main_grid"></div>
+</div>
+
+<!-- PROJEKTE -->
+<div class="main7">
+  <a class="headline">Projekte</a>
+  <div id="projects" class="main_grid"></div>
+</div>
+
+<!-- JOIN -->
+<div id="join" class="main3">
+  <a class="headline">Mitmachen</a>
+  <a data-ip-target>IP wird geladen...</a>
+</div>
+
+<footer>
+  <a href="https://github.com/FQQD/MCServer-Web-Template">
+    Template by FQQD - angepasst
+  </a>
+</footer>
+
+<!-- YAML -->
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
+<!-- ========================= -->
+<!-- IP SYSTEM (DEIN CODE) -->
+<!-- ========================= -->
+<script>
+window.CURRENT_IP = "";
+const IP_CONFIG_PATH = "/config/ip.yml";
+
+async function loadIpConfig() {
+  const res = await fetch(IP_CONFIG_PATH);
+  return jsyaml.load(await res.text());
+}
+
+async function loadCurrentIp() {
+  const config = await loadIpConfig();
+  window.CURRENT_IP = config.fixed_ip || "Keine IP";
+
+  document.querySelectorAll('[data-ip-target]').forEach(el => {
+    el.textContent = window.CURRENT_IP;
+  });
+}
+
+function copyText() {
+  navigator.clipboard.writeText(window.CURRENT_IP);
+}
+
+document.addEventListener("DOMContentLoaded", loadCurrentIp);
+</script>
+
+<!-- ========================= -->
+<!-- CONTENT SYSTEM -->
+<!-- ========================= -->
+<script>
+// -------------------------
+// YOUTUBE OHNE API (RSS)
+// -------------------------
+async function loadVideosRSS(channelId) {
+  const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+
+  const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}`;
+
+  const res = await fetch(proxy);
+  if (!res.ok) throw new Error("RSS konnte nicht geladen werden");
+
+  const data = await res.json();
+
+  const parser = new DOMParser();
+  const xml = parser.parseFromString(data.contents, "text/xml");
+
+  const entries = [...xml.querySelectorAll("entry")].slice(0, 4);
+
+  return entries.map(entry => ({
+    title: entry.querySelector("title").textContent,
+    link: entry.querySelector("link").getAttribute("href"),
+    thumbnail: entry.querySelector("media\\:thumbnail").getAttribute("url")
+  }));
+}
+
+function renderVideos(videos) {
+  const container = document.getElementById("yt-videos");
+  container.innerHTML = "";
+
+  videos.forEach(v => {
+    container.innerHTML += `
+      <div class="card">
+        <a href="${v.link}" target="_blank">
+          <img src="${v.thumbnail}">
+          <p>${v.title}</p>
+        </a>
+      </div>
+    `;
+  });
+}
+
+// INIT (ersetzt deinen alten YouTube Teil)
+async function initYouTube(channelId) {
+  try {
+    const videos = await loadVideosRSS(channelId);
+    renderVideos(videos);
+  } catch (err) {
+    console.error("YT RSS Fehler:", err);
+  }
+}
+</script>
+
+<!-- EXTERNAL -->
+<script src="/media/discord-widget.js"></script>
+<script src="/userpages/users.js"></script>
+
+</body>
+</html>
