@@ -1,0 +1,7 @@
+youtube_channel_id: UCXXXX
+
+projects:
+  - name: "Projekt"
+    description: "Beschreibung"
+    image: "/media/placeholder.png"
+    url: "#"
