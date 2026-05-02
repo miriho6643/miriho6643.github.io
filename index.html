@@ -100,6 +100,26 @@ function mobile_navbar_link_hider() {
 <script>
 const CONTENT_PATH = "/config/content.yml";
 
+/* PROJEKTE -> nutzt dein SUPPORTER Layout */
+function renderProjects(projects) {
+  const c = document.getElementById("projects");
+  c.innerHTML = "";
+
+  projects.forEach(p => {
+    c.innerHTML += `
+      <div class="main5_supporters_div">
+        <a href="${p.url}" target="_blank" class="main5_group_link">
+          <img class="main5_supporters_img" src="${p.image}">
+          <div class="main5_supporters_description_div">
+            <div class="main5_supporters_description_title">${p.name}</div>
+            <div class="main5_supporters_description">${p.description}</div>
+          </div>
+        </a>
+      </div>
+    `;
+  });
+}
+  
 /* YOUTUBE RSS */
 async function loadVideos(channelId) {
   const feed = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
@@ -136,37 +156,17 @@ function renderVideos(videos) {
   });
 }
 
-/* PROJEKTE -> nutzt dein SUPPORTER Layout */
-function renderProjects(projects) {
-  const c = document.getElementById("projects");
-  c.innerHTML = "";
-
-  projects.forEach(p => {
-    c.innerHTML += `
-      <div class="main5_supporters_div">
-        <a href="${p.url}" target="_blank" class="main5_group_link">
-          <img class="main5_supporters_img" src="${p.image}">
-          <div class="main5_supporters_description_div">
-            <div class="main5_supporters_description_title">${p.name}</div>
-            <div class="main5_supporters_description">${p.description}</div>
-          </div>
-        </a>
-      </div>
-    `;
-  });
-}
-
 /* INIT */
 async function init() {
   const cfg = jsyaml.load(await (await fetch(CONTENT_PATH)).text());
 
+  if (cfg.projects) {
+    renderProjects(cfg.projects);
+  }
+  
   if (cfg.youtube_channel_id) {
     const vids = await loadVideos(cfg.youtube_channel_id);
     renderVideos(vids);
-  }
-
-  if (cfg.projects) {
-    renderProjects(cfg.projects);
   }
 }
 
