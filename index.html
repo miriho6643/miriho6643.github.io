@@ -67,52 +67,9 @@
   <div id="projects" class="main5_supporter_div"></div>
 </div>
 
-<!-- JOIN -->
-<div id="join" class="main3">
-  <div class="headline">Mitspielen</div>
-
-  <div class="main3_join_div_div">
-    <div class="main3_join_div">
-      <div class="main3_join_title">Server</div>
-      <div class="main3_join_content_div">
-        <div class="main3_join_categories">
-          <span>IP:</span>
-        </div>
-        <div class="main3_join_values">
-          <span data-ip-target>lädt...</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <footer class="copyright_div">
   <a class="copyright">Bearbeitet von Miriho6643</a>
 </footer>
-
-<!-- ===================== -->
-<!-- IP SYSTEM -->
-<!-- ===================== -->
-<script>
-window.CURRENT_IP = "";
-
-async function loadIp() {
-  const res = await fetch("/config/ip.yml");
-  const cfg = jsyaml.load(await res.text());
-
-  window.CURRENT_IP = cfg.fixed_ip || "keine IP";
-
-  document.querySelectorAll("[data-ip-target]").forEach(e => {
-    e.textContent = window.CURRENT_IP;
-  });
-}
-
-function copyText() {
-  navigator.clipboard.writeText(window.CURRENT_IP);
-}
-
-document.addEventListener("DOMContentLoaded", loadIp);
-</script>
 
 <!-- ===================== -->
 <!-- CONTENT (OHNE API KEY) -->
