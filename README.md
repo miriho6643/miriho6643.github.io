@@ -25,6 +25,8 @@ Dieses Projekt ist eine statische Website (GitHub Pages geeignet), die Inhalte d
 │  ├─ index.html               # Links-Landingpage
 │  ├─ links.js                 # Renderer für links.yml
 │  └─ links.yml                # Link-Konfiguration
+├─minecraft/
+│  └─ index.html               # Minecraft Seite (alte Startseite)
 ├─ userpages/
 │  ├─ index.html               # Übersicht + Profilansicht (?user=...)
 │  ├─ users.js                 # Team/Profil-Renderer
