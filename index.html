@@ -64,81 +64,11 @@ function mobile_navbar_link_hider() {
   <div id="more"></div>
 
   <div id="projects">
-    <script>
-      const CONTENT_PATH = "/config/content.yml";
-      
-      /* YOUTUBE RSS */
-      async function loadVideos(channelId) {
-        const feed = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-        const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(feed)}`;
-      
-        const res = await fetch(proxy);
-        const data = await res.json();
-      
-        const xml = new DOMParser().parseFromString(data.contents, "text/xml");
-        const entries = [...xml.querySelectorAll("entry")].slice(0, 4);
-      
-        return entries.map(e => ({
-          title: e.querySelector("title").textContent,
-          link: e.querySelector("link").getAttribute("href"),
-          thumb: e.querySelector("media\\:thumbnail").getAttribute("url")
-        }));
-      }
-      
-      /* RENDER VIDEOS -> nutzt DEIN Feature-System */
-      function renderVideos(videos) {
-        const c = document.getElementById("yt-videos");
-        c.innerHTML = "";
-      
-        videos.forEach(v => {
-          c.innerHTML += `
-            <div class="main2_feature">
-              <a href="${v.link}" target="_blank">
-                <img class="main2_feature_img" src="${v.thumb}">
-                <div class="main2_feature_headline">${v.title}</div>
-                <div class="main2_feature_text">YouTube Video</div>
-              </a>
-            </div>
-          `;
-        });
-      }
-      
-      /* PROJEKTE -> nutzt dein SUPPORTER Layout */
-      function renderProjects(projects) {
-        const c = document.getElementById("projects");
-        c.innerHTML = "";
-      
-        projects.forEach(p => {
-          c.innerHTML += `
-            <div class="main5_supporters_div">
-              <a href="${p.url}" target="_blank" class="main5_group_link">
-                <img class="main5_supporters_img" src="${p.image}">
-                <div class="main5_supporters_description_div">
-                  <div class="main5_supporters_description_title">${p.name}</div>
-                  <div class="main5_supporters_description">${p.description}</div>
-                </div>
-              </a>
-            </div>
-          `;
-        });
-      }
-      
-      /* INIT */
-      async function init() {
-        const cfg = jsyaml.load(await (await fetch(CONTENT_PATH)).text());
-      
-        if (cfg.youtube_channel_id) {
-          const vids = await loadVideos(cfg.youtube_channel_id);
-          renderVideos(vids);
-        }
-      
-        if (cfg.projects) {
-          renderProjects(cfg.projects);
-        }
-      }
-      
-      document.addEventListener("DOMContentLoaded", init);
-    </script>
+    <!-- PROJEKTE (WICHTIG: SUPPORTER STYLE benutzen!) -->
+    <div class="main5">
+      <div class="headline">Projekte</div>
+      <div id="projects" class="main5_supporter_div"></div>
+    </div>
   </div>
   
   <div id="discord"></div>
@@ -154,12 +84,95 @@ function mobile_navbar_link_hider() {
       <div class="tile discord-widget" data-server-id="1398660969500246137" data-invite-url="https://discord.gg/NHnzNF2rYv"></div>
     </div>
   </div>
+
+  <div id="videos"></div>
+  <div class="main2">
+    <div class="headline">Features</div>    
+    <div class="main2_features_div" id="yt-videos"></div>
+  </div>
+  
 <footer class="copyright_div">
   <a href="https://github.com/FQQD/MCServer-Web-Template" class="copyright">Erstellt von FQQD 2023 - Bearbeitet von Miriho6643 2025</a>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 
+<script>
+const CONTENT_PATH = "/config/content.yml";
+
+/* YOUTUBE RSS */
+async function loadVideos(channelId) {
+  const feed = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+  const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(feed)}`;
+
+  const res = await fetch(proxy);
+  const data = await res.json();
+
+  const xml = new DOMParser().parseFromString(data.contents, "text/xml");
+  const entries = [...xml.querySelectorAll("entry")].slice(0, 4);
+
+  return entries.map(e => ({
+    title: e.querySelector("title").textContent,
+    link: e.querySelector("link").getAttribute("href"),
+    thumb: e.querySelector("media\\:thumbnail").getAttribute("url")
+  }));
+}
+
+/* RENDER VIDEOS -> nutzt DEIN Feature-System */
+function renderVideos(videos) {
+  const c = document.getElementById("yt-videos");
+  c.innerHTML = "";
+
+  videos.forEach(v => {
+    c.innerHTML += `
+      <div class="main2_feature">
+        <a href="${v.link}" target="_blank">
+          <img class="main2_feature_img" src="${v.thumb}">
+          <div class="main2_feature_headline">${v.title}</div>
+          <div class="main2_feature_text">YouTube Video</div>
+        </a>
+      </div>
+    `;
+  });
+}
+
+/* PROJEKTE -> nutzt dein SUPPORTER Layout */
+function renderProjects(projects) {
+  const c = document.getElementById("projects");
+  c.innerHTML = "";
+
+  projects.forEach(p => {
+    c.innerHTML += `
+      <div class="main5_supporters_div">
+        <a href="${p.url}" target="_blank" class="main5_group_link">
+          <img class="main5_supporters_img" src="${p.image}">
+          <div class="main5_supporters_description_div">
+            <div class="main5_supporters_description_title">${p.name}</div>
+            <div class="main5_supporters_description">${p.description}</div>
+          </div>
+        </a>
+      </div>
+    `;
+  });
+}
+
+/* INIT */
+async function init() {
+  const cfg = jsyaml.load(await (await fetch(CONTENT_PATH)).text());
+
+  if (cfg.youtube_channel_id) {
+    const vids = await loadVideos(cfg.youtube_channel_id);
+    renderVideos(vids);
+  }
+
+  if (cfg.projects) {
+    renderProjects(cfg.projects);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", init);
+</script>
+  
 <script src="/media/discord-widget.js?v=20260304c"></script>
 <script src="/userpages/users.js?v=20260301d"></script>
 </body>
