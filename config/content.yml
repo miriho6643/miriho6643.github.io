@@ -1,7 +1,7 @@
 youtube_channel_id: UCAzTBJ43Wo9kWWLVT2nTCHQ
 
 projects:
-  - name: "Projekt"
+  - name: "Minecraft Server"
     description: "Unser Minecraft Server"
     image: "/media/placeholder.png"
     url: "/minecraft/"
