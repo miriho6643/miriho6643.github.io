@@ -2,6 +2,6 @@ youtube_channel_id: UCXXXX
 
 projects:
   - name: "Projekt"
-    description: "Beschreibung"
+    description: "Unser Minecraft Server"
     image: "/media/placeholder.png"
-    url: "#"
+    url: "/minecraft/"
