@@ -27,78 +27,91 @@
 <!-- HERO -->
 <div class="main1">
   <img class="main1_logo" src="/media/logo.png">
+
   <div class="main1_description">
-    <a class="main1_actcent">Willkommen</a><br>
-    <a>auf unserer Webseite</a>
+    <span class="main1_actcent">Willkommen</span><br>
+    <span>auf unserer Webseite</span>
   </div>
 
-  <button id="copy-ip" onclick="copyText()">
-    <span data-ip-target>lädt...</span>
+  <button class="main1_ipcopier" onclick="copyText()" id="copy-ip">
+    <span class="main1_ipcopier_text1" data-ip-target>lädt...</span><br>
+    <span class="main1_ipcopier_text2">Zum Kopieren klicken</span>
   </button>
 </div>
 
-<!-- FEATURES -->
+<!-- FEATURES (bleibt wie dein Design) -->
 <div class="main2">
-  <a class="headline">Features</a>
+  <div class="headline">Features</div>
 </div>
 
 <!-- DISCORD -->
 <div id="discord" class="main4">
-  <a class="headline">Discord</a>
-  <div class="discord-widget" data-server-id="1398660969500246137"></div>
+  <div class="headline">Discord</div>
+  <div class="main4_dc_div">
+    <div class="discord-widget" data-server-id="1398660969500246137"></div>
+  </div>
 </div>
 
-<!-- USER -->
+<!-- TEAM -->
 <div id="about" class="main5">
-  <a class="headline">Team</a>
-  <div id="main-team-members"></div>
+  <div class="headline">Team</div>
+  <div id="main-team-members" class="main5_admin_div"></div>
 </div>
 
-<!-- VIDEOS -->
-<div class="main6">
-  <a class="headline">Neueste Videos</a>
-  <div id="yt-videos" class="main_grid"></div>
+<!-- YOUTUBE -->
+<div class="main2">
+  <div class="headline">Neueste Videos</div>
+
+  <div id="yt-videos" class="main2_features_div"></div>
 </div>
 
 <!-- PROJEKTE -->
-<div class="main7">
-  <a class="headline">Projekte</a>
-  <div id="projects" class="main_grid"></div>
+<div class="main5">
+  <div class="headline">Projekte</div>
+
+  <div id="projects" class="main5_supporter_div"></div>
 </div>
 
 <!-- JOIN -->
 <div id="join" class="main3">
-  <a class="headline">Mitmachen</a>
-  <a data-ip-target>IP wird geladen...</a>
+  <div class="headline">Mitspielen</div>
+
+  <div class="main3_join_div_div">
+    <div class="main3_join_div">
+      <div class="main3_join_title">Zugang</div>
+      <div class="main3_join_content_div">
+        <div class="main3_join_categories">
+          <span>IP:</span>
+        </div>
+        <div class="main3_join_values">
+          <span data-ip-target>lädt...</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<footer>
-  <a href="https://github.com/FQQD/MCServer-Web-Template">
-    Template by FQQD - angepasst
-  </a>
+<footer class="copyright_div">
+  <a class="copyright">Bearbeitet von Miriho6643</a>
 </footer>
 
 <!-- YAML -->
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 
-<!-- ========================= -->
-<!-- IP SYSTEM (DEIN CODE) -->
-<!-- ========================= -->
+<!-- ===================== -->
+<!-- IP SYSTEM -->
+<!-- ===================== -->
 <script>
 window.CURRENT_IP = "";
-const IP_CONFIG_PATH = "/config/ip.yml";
 
-async function loadIpConfig() {
-  const res = await fetch(IP_CONFIG_PATH);
-  return jsyaml.load(await res.text());
-}
+async function loadIp() {
+  const res = await fetch("/config/ip.yml");
+  const cfg = jsyaml.load(await res.text());
 
-async function loadCurrentIp() {
-  const config = await loadIpConfig();
-  window.CURRENT_IP = config.fixed_ip || "Keine IP";
+  window.CURRENT_IP = cfg.fixed_ip || "keine IP";
 
-  document.querySelectorAll('[data-ip-target]').forEach(el => {
-    el.textContent = window.CURRENT_IP;
+  document.querySelectorAll("[data-ip-target]").forEach(e => {
+    e.textContent = window.CURRENT_IP;
   });
 }
 
@@ -106,66 +119,84 @@ function copyText() {
   navigator.clipboard.writeText(window.CURRENT_IP);
 }
 
-document.addEventListener("DOMContentLoaded", loadCurrentIp);
+document.addEventListener("DOMContentLoaded", loadIp);
 </script>
 
-<!-- ========================= -->
+<!-- ===================== -->
 <!-- CONTENT SYSTEM -->
-<!-- ========================= -->
+<!-- ===================== -->
 <script>
-// -------------------------
-// YOUTUBE OHNE API (RSS)
-// -------------------------
-async function loadVideosRSS(channelId) {
-  const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+const CONTENT_PATH = "/config/content.yml";
 
-  const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}`;
+// YOUTUBE (RSS OHNE API)
+async function loadVideos(channelId) {
+  const feed = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+  const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(feed)}`;
 
   const res = await fetch(proxy);
-  if (!res.ok) throw new Error("RSS konnte nicht geladen werden");
-
   const data = await res.json();
 
-  const parser = new DOMParser();
-  const xml = parser.parseFromString(data.contents, "text/xml");
+  const xml = new DOMParser().parseFromString(data.contents, "text/xml");
+  const entries = [...xml.querySelectorAll("entry")].slice(0,4);
 
-  const entries = [...xml.querySelectorAll("entry")].slice(0, 4);
-
-  return entries.map(entry => ({
-    title: entry.querySelector("title").textContent,
-    link: entry.querySelector("link").getAttribute("href"),
-    thumbnail: entry.querySelector("media\\:thumbnail").getAttribute("url")
+  return entries.map(e => ({
+    title: e.querySelector("title").textContent,
+    link: e.querySelector("link").getAttribute("href"),
+    thumb: e.querySelector("media\\:thumbnail").getAttribute("url")
   }));
 }
 
 function renderVideos(videos) {
-  const container = document.getElementById("yt-videos");
-  container.innerHTML = "";
+  const c = document.getElementById("yt-videos");
+  c.innerHTML = "";
 
   videos.forEach(v => {
-    container.innerHTML += `
-      <div class="card">
+    c.innerHTML += `
+      <div class="main2_feature">
         <a href="${v.link}" target="_blank">
-          <img src="${v.thumbnail}">
-          <p>${v.title}</p>
+          <img class="main2_feature_img" src="${v.thumb}">
+          <div class="main2_feature_headline">${v.title}</div>
         </a>
       </div>
     `;
   });
 }
 
-// INIT (ersetzt deinen alten YouTube Teil)
-async function initYouTube(channelId) {
-  try {
-    const videos = await loadVideosRSS(channelId);
-    renderVideos(videos);
-  } catch (err) {
-    console.error("YT RSS Fehler:", err);
+// PROJEKTE
+function renderProjects(projects) {
+  const c = document.getElementById("projects");
+  c.innerHTML = "";
+
+  projects.forEach(p => {
+    c.innerHTML += `
+      <div class="main5_supporters_div">
+        <a href="${p.url}" target="_blank">
+          <img class="main5_supporters_img" src="${p.image}">
+          <div class="main5_supporters_description_title">${p.name}</div>
+          <div class="main5_supporters_description">${p.description}</div>
+        </a>
+      </div>
+    `;
+  });
+}
+
+// INIT
+async function init() {
+  const cfg = jsyaml.load(await (await fetch(CONTENT_PATH)).text());
+
+  if (cfg.youtube_channel_id) {
+    const vids = await loadVideos(cfg.youtube_channel_id);
+    renderVideos(vids);
+  }
+
+  if (cfg.projects) {
+    renderProjects(cfg.projects);
   }
 }
+
+document.addEventListener("DOMContentLoaded", init);
 </script>
 
-<!-- EXTERNAL -->
 <script src="/media/discord-widget.js"></script>
 <script src="/userpages/users.js"></script>
 
