@@ -1087,3 +1087,10 @@ body {
     cursor: default;
     pointer-events: auto;
 }
+
+.main2_features_div,
+.main5_supporter_div,
+.main5_admin_div {
+    box-sizing: border-box;
+    width: 100%;
+}
