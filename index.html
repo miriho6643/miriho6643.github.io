@@ -99,6 +99,7 @@ function mobile_navbar_link_hider() {
 
 <script>
 const CONTENT_PATH = "/config/content.yml";
+const handle = "miriho6643yt"; // DEIN HANDLE (ohne @)
 
 /* PROJEKTE -> nutzt dein SUPPORTER Layout */
 function renderProjects(projects) {
@@ -120,25 +121,40 @@ function renderProjects(projects) {
   });
 }
   
-/* YOUTUBE RSS */
-async function loadVideos(channelId) {
-  const feed = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-  const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(feed)}`;
+// -------------------------
+// YOUTUBE OHNE API / RSS
+// -------------------------
+async function getChannelVideos(channelHandle) {
+  try {
+    const url = `https://www.youtube.com/@${channelHandle}/videos`;
 
-  const res = await fetch(proxy);
-  const data = await res.json();
+    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+    const res = await fetch(proxy);
+    const data = await res.json();
 
-  const xml = new DOMParser().parseFromString(data.contents, "text/xml");
-  const entries = [...xml.querySelectorAll("entry")].slice(0, 4);
+    const html = data.contents;
 
-  return entries.map(e => ({
-    title: e.querySelector("title").textContent,
-    link: e.querySelector("link").getAttribute("href"),
-    thumb: e.querySelector("media\\:thumbnail").getAttribute("url")
-  }));
+    // Video IDs aus HTML extrahieren
+    const ids = [...html.matchAll(/"videoId":"(.*?)"/g)]
+      .map(m => m[1])
+      .filter((v, i, a) => a.indexOf(v) === i) // duplicates raus
+      .slice(0, 4);
+
+    return ids.map(id => ({
+      id,
+      link: `https://www.youtube.com/watch?v=${id}`,
+      thumb: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+    }));
+
+  } catch (err) {
+    console.error("YT Fehler:", err);
+    return [];
+  }
 }
 
-/* RENDER VIDEOS -> nutzt DEIN Feature-System */
+// -------------------------
+// RENDER (dein System)
+// -------------------------
 function renderVideos(videos) {
   const c = document.getElementById("yt-videos");
   c.innerHTML = "";
@@ -148,8 +164,8 @@ function renderVideos(videos) {
       <div class="main2_feature">
         <a href="${v.link}" target="_blank">
           <img class="main2_feature_img" src="${v.thumb}">
-          <div class="main2_feature_headline">${v.title}</div>
-          <div class="main2_feature_text">YouTube Video</div>
+          <div class="main2_feature_headline">Video</div>
+          <div class="main2_feature_text">${v.id}</div>
         </a>
       </div>
     `;
@@ -164,8 +180,8 @@ async function init() {
     renderProjects(cfg.projects);
   }
   
-  if (cfg.youtube_channel_id) {
-    const vids = await loadVideos(cfg.youtube_channel_id);
+  if (cfg.handle) {
+    const vids = await getChannelVideos(handle);
     renderVideos(vids);
   }
 }
