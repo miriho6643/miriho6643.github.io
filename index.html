@@ -188,6 +188,130 @@ async function init() {
 
 document.addEventListener("DOMContentLoaded", init);
 </script>
+
+<script>
+window.CURRENT_IP = "";
+const IP_CONFIG_PATH = "/config/ip.yml";
+
+function setIpText(value) {
+  const targets = document.querySelectorAll('[data-ip-target], #ip-display, #ip-footer');
+  targets.forEach((el) => {
+    el.textContent = value;
+  });
+}
+
+function setCopyEnabled(enabled) {
+  const copyButton = document.getElementById('copy-ip');
+  if (!copyButton) return;
+  copyButton.disabled = !enabled;
+  copyButton.style.opacity = enabled ? '1' : '0.6';
+  copyButton.style.cursor = enabled ? 'pointer' : 'not-allowed';
+}
+
+async function loadCurrentIp() {
+  try {
+    const ipValue = await resolveIpValue();
+    if (!ipValue) {
+      throw new Error('Keine IP oder Domain konfiguriert');
+    }
+    window.CURRENT_IP = ipValue;
+    setIpText(window.CURRENT_IP);
+    setCopyEnabled(true);
+  } catch (err) {
+    window.CURRENT_IP = '';
+    setIpText('IP konnte nicht geladen werden');
+    setCopyEnabled(false);
+    console.error('[ip] Fehler beim Laden:', err);
+  }
+}
+
+function copyText() {
+  if (!window.CURRENT_IP) return;
+  navigator.clipboard.writeText(window.CURRENT_IP);
+}
+
+async function loadIpConfig() {
+  const res = await fetch(IP_CONFIG_PATH, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error('Konnte ip.yml nicht laden: HTTP ' + res.status);
+  }
+  return jsyaml.load(await res.text()) || {};
+}
+
+function normalizeIpSource(source) {
+  const normalized = String(source || "").trim().toLowerCase();
+  if (normalized === "fixed") return "fixed";
+  if (normalized === "domain") return "domain";
+  return "json";
+}
+
+async function resolveIpFromJson(config) {
+  const jsonUrl = String(config.json_url || "").trim();
+  const jsonField = String(config.json_field || "ip").trim();
+  if (!jsonUrl) {
+    throw new Error('json_url fehlt in ip.yml');
+  }
+
+  const res = await fetch(jsonUrl, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error('json_url antwortet mit HTTP ' + res.status);
+  }
+
+  const data = await res.json();
+  const value = data && typeof data[jsonField] === "string" ? data[jsonField].trim() : "";
+  if (!value) {
+    throw new Error('json_field "' + jsonField + '" ist leer oder fehlt');
+  }
+  return value;
+}
+
+function resolveIpFromFixed(config) {
+  const fixedIp = String(config.fixed_ip || "").trim();
+  return fixedIp;
+}
+
+function resolveIpFromDomain(config) {
+  const domain = String(config.domain || "").trim();
+  return domain;
+}
+
+async function resolveIpValue() {
+  const config = await loadIpConfig();
+  const source = normalizeIpSource(config.ip_source);
+  if (source === "fixed") return resolveIpFromFixed(config);
+  if (source === "domain") return resolveIpFromDomain(config);
+  return resolveIpFromJson(config);
+}
+
+$(document).ready(function() {
+  setCopyEnabled(false);
+  loadCurrentIp();
+
+  $('.main1_ipcopier').click(function() {
+    if (!window.CURRENT_IP) return;
+    var popup = $('<div>', { class: 'main1_popup' }).append($('<h3 class="copy_confirm">').text('IP in die Zwischenablage kopiert'));
+    $(this).after(popup);
+    setTimeout(function() { popup.remove(); }, 1000);
+  });
+
+  const scrollLinks = document.querySelectorAll('.scroll');
+  scrollLinks.forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      const href = link.getAttribute('href') || '';
+      const hashIndex = href.indexOf('#');
+      if (hashIndex === -1) return;
+
+      const hash = href.slice(hashIndex);
+      const target = document.querySelector(hash);
+      if (!target) return;
+
+      event.preventDefault();
+      const offsetTop = target.offsetTop;
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    });
+  });
+});
+</script>
   
 <script src="/media/discord-widget.js?v=20260304c"></script>
 <script src="/userpages/users.js?v=20260301d"></script>
