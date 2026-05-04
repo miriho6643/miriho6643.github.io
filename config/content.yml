@@ -1,7 +1,7 @@
 youtube_channel_id: Miriho6643YT
 
 projects:
-  - name: "Minecraft Server"
+  - name: "Project Minecraft"
     description: "Unser Minecraft Server"
     image: "/media/placeholder.png"
     url: "/minecraft/"
