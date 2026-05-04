@@ -1,0 +1,4 @@
+- name: "Project Minecraft"
+  description: "Unser Minecraft Server"
+  image: "/media/placeholder.png"
+  url: "/minecraft/"

@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#16191b">
+  <meta name="color-scheme" content="dark">
   <title>Links – Miriho</title>
   <link rel="icon" type="image/png" href="../media/favicon.png">
   <link rel="stylesheet" href="../media/style.css">
@@ -23,6 +25,30 @@
   </div>
 </nav>
 
+<div class="mobile_navbar">
+  <a href="/" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="../media/logo_small.png" alt="Logo"></a>
+  <div id="mobile_navbar_links">
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/wiki/">Wiki</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/#discord">Community</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/#about">Über uns</a>
+      <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="/#join">Mitspielen!</a>
+  </div>
+  <div class="icon" onclick="mobile_navbar_link_hider()">
+      <i class="fa fa-bars"></i>
+  </div>
+</div>
+
+<script>
+function mobile_navbar_link_hider() {
+  var x = document.getElementById("mobile_navbar_links");
+  if (x.style.display === "flex") {
+      x.style.display = "none";
+  } else {
+      x.style.display = "flex";
+  }
+}
+</script>
+
 <div class="mainflex">
   <div class="main2">
     <div id="links-root" class="main2_features_div"></div>
@@ -30,10 +56,11 @@
 </div>
 
 <footer class="copyright_div">
-  <a href="https://github.com/miriho6643" class="copyright">Erstellt von Miriho6643 2026 - Bearbeitet von CityBuilderBot 2026</a>
+  <a href="https://github.com/miriho6643" class="copyright" data-footer-template="Erstellt von Miriho6643 {year} - Bearbeitet von CityBuilderBot {year}">Erstellt von Miriho6643 2026 - Bearbeitet von CityBuilderBot 2026</a>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="/media/site.js?v=20260504a"></script>
 <script src="links.js"></script>
 </body>
 </html>

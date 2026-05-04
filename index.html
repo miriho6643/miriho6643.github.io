@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#16191b">
+    <meta name="color-scheme" content="dark">
     <title>Miriho's Webseite</title>
     <link rel="icon" type="image/png" href="/media/favicon.png">
-    <link rel="stylesheet" href="/media/style.css?v=20260301a">
     <link rel="stylesheet" href="/media/discord-widget.css">
+    <link rel="stylesheet" href="/media/style.css?v=20260504c">
     <link href="https://fonts.bunny.net/css?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 <body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <nav class="desktop_navbar">
   <a href="/"><img class="desktop_navbar_logo_img" src="/media/logo_small.png" alt="Logo"></a>
   <a href="/wiki/" class="desktop_navbar_link">Wiki</a>
   <a href="/#projects" class="desktop_navbar_link scroll">Projekte</a>
   <a href="/#discord" class="desktop_navbar_link scroll">Community</a>
   <a href="/#about" class="desktop_navbar_link scroll">Über uns</a>
-  </div>
 </nav>
 
 <div class="mobile_navbar">
@@ -53,8 +52,8 @@ function mobile_navbar_link_hider() {
       <img class="main1_logo" src="/media/logo.png" alt="Logo">
     </a>
     <div class="main1_description">
-      <a class="main1_actcent">Projekte</a><br>
-      <a>wie unsere</a>
+      <span id="hero-accent" class="main1_actcent">Projekte</span><br>
+      <span id="hero-text">wie unsere</span>
     </div>
     <a href="#more" class="scroll">
       <img alt="Pfeil nach unten" class="main1_downarrow" src="/media/downarrow.png">
@@ -63,242 +62,72 @@ function mobile_navbar_link_hider() {
 
   <div id="more"></div>
 
-  <div id="projects">
-    <!-- PROJEKTE (WICHTIG: SUPPORTER STYLE benutzen!) -->
-    <div class="main5">
-      <div class="headline">Projekte</div>
-      <div id="projects" class="main5_supporter_div"></div>
-    </div>
-  </div>
+  <section id="projects" class="main5">
+    <div id="projects-heading" class="headline">Projekte</div>
+    <div id="projects-list" class="main5_supporter_div"></div>
+  </section>
   
-  <div id="discord"></div>
-  <div id="about"></div>
-  <div class="main5">
-    <a class="headline">Wer wir sind</a>
+  <div class="main5" id="about">
+    <div id="about-heading" class="headline">Wer wir sind</div>
     <div id="main-team-members" class="main5_admin_div"></div>
     <div id="main-team-groups" class="main5_supporter_div"></div>
   </div>
-  <div class="main4">
-    <a class="headline">Tritt unserem Discord bei</a>
-    <div class="main4_dc_div">
-      <div class="tile discord-widget" data-server-id="1398660969500246137" data-invite-url="https://discord.gg/NHnzNF2rYv"></div>
+  <section class="homepage_media_row">
+    <div class="main4" id="discord">
+      <div id="community-heading" class="headline">Tritt unserem Discord bei</div>
+      <div id="homepage-discord-widget" class="tile discord-widget homepage-discord-widget"></div>
     </div>
-  </div>
 
-  <div id="videos"></div>
-  <div class="main2">
-    <div class="headline">Unsere Videos</div> 
-    <div class="main2_features_div" id="yt-videos"></div>
-  </div>
-  
+    <section id="videos-section" class="main2">
+      <div id="videos-heading" class="headline">Unsere Videos</div>
+      <div class="main4_dc_div">
+        <div id="homepage-youtube-widget" class="tile discord-widget youtube-widget">
+          <div class="discord-widget__row">
+            <div class="discord-widget__icon discord-widget__icon--fallback youtube-widget__icon">YT</div>
+            <div class="youtube-widget__header-text">
+              <div id="videos-channel-name" class="discord-widget__title">Miriho6643YT</div>
+              <div class="discord-widget__state youtube-widget__subtitle">Unsere Videos</div>
+            </div>
+          </div>
+          <p id="videos-intro" class="discord-widget__state youtube-widget__intro">Neueste Uploads vom YouTube-Kanal.</p>
+          <div id="videos-actions" class="discord-widget__actions youtube-widget__actions"></div>
+        </div>
+      </div>
+    </section>
+  </section>
+</div>
+
 <footer class="copyright_div">
-  <a href="https://github.com/FQQD/MCServer-Web-Template" class="copyright">Erstellt von FQQD 2023 - Bearbeitet von Miriho6643 2025</a>
+  <a href="https://github.com/FQQD/MCServer-Web-Template" class="copyright" data-footer-template="Erstellt von FQQD 2023 - Bearbeitet von Miriho6643 {year}">Erstellt von FQQD 2023 - Bearbeitet von Miriho6643 2026</a>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 
 <script>
 const CONTENT_PATH = "/config/content.yml";
-const handle = "miriho6643yt"; // DEIN HANDLE (ohne @)
+const PROJECTS_PATH = "/config/projects.yml";
 
-/* PROJEKTE -> nutzt dein SUPPORTER Layout */
-function renderProjects(projects) {
-  const c = document.getElementById("projects");
-  c.innerHTML = "";
-
-  projects.forEach(p => {
-    c.innerHTML += `
-      <a href="${p.url}" class="main5_group_link">
-        <div class="main5_supporters_div", style="border-radius:20px;">
-          <img class="main5_supporters_img" src="${p.image}">
-          <div class="main5_supporters_description_div">
-            <div class="main5_supporters_description_title">${p.name}</div>
-            <div class="main5_supporters_description">${p.description}</div>
-          </div>
-        </a>
-      </div>
-    `;
-  });
+async function loadYamlFile(path) {
+  const response = await fetch(path, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`Konnte ${path} nicht laden: HTTP ${response.status}`);
+  }
+  return jsyaml.load(await response.text());
 }
-  
-// -------------------------
-// YOUTUBE OHNE API / RSS
-// -------------------------
-async function getChannelVideos(channelHandle) {
-  try {
-    const url = `https://www.youtube.com/@${channelHandle}/videos`;
 
-    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-    const res = await fetch(proxy);
-    const data = await res.json();
-
-    const html = data.contents;
-
-    // Video IDs aus HTML extrahieren
-    const ids = [...html.matchAll(/"videoId":"(.*?)"/g)]
-      .map(m => m[1])
-      .filter((v, i, a) => a.indexOf(v) === i) // duplicates raus
-      .slice(0, 4);
-
-    return ids.map(id => ({
-      id,
-      link: `https://www.youtube.com/watch?v=${id}`,
-      thumb: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
-    }));
-
-  } catch (err) {
-    console.error("YT Fehler:", err);
-    return [];
+function setText(id, value) {
+  const element = document.getElementById(id);
+  if (element && value) {
+    element.textContent = value;
   }
 }
 
-// -------------------------
-// RENDER (dein System)
-// -------------------------
-function renderVideos(videos) {
-  const c = document.getElementById("yt-videos");
-  c.innerHTML = "";
-
-  videos.forEach(v => {
-    c.innerHTML += `
-      <div class="main2_feature">
-        <a href="${v.link}" target="_blank">
-          <img class="main2_feature_img" src="${v.thumb}">
-          <div class="main2_feature_headline">Video</div>
-          <div class="main2_feature_text">${v.id}</div>
-        </a>
-      </div>
-    `;
-  });
-}
-
-/* INIT */
-async function init() {
-  const cfg = jsyaml.load(await (await fetch(CONTENT_PATH)).text());
-
-  if (cfg.projects) {
-    renderProjects(cfg.projects);
-  }
-  
-  if (cfg.handle) {
-    const vids = await getChannelVideos(handle);
-    renderVideos(vids);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", init);
-</script>
-
-<script>
-window.CURRENT_IP = "";
-const IP_CONFIG_PATH = "/config/ip.yml";
-
-function setIpText(value) {
-  const targets = document.querySelectorAll('[data-ip-target], #ip-display, #ip-footer');
-  targets.forEach((el) => {
-    el.textContent = value;
-  });
-}
-
-function setCopyEnabled(enabled) {
-  const copyButton = document.getElementById('copy-ip');
-  if (!copyButton) return;
-  copyButton.disabled = !enabled;
-  copyButton.style.opacity = enabled ? '1' : '0.6';
-  copyButton.style.cursor = enabled ? 'pointer' : 'not-allowed';
-}
-
-async function loadCurrentIp() {
-  try {
-    const ipValue = await resolveIpValue();
-    if (!ipValue) {
-      throw new Error('Keine IP oder Domain konfiguriert');
-    }
-    window.CURRENT_IP = ipValue;
-    setIpText(window.CURRENT_IP);
-    setCopyEnabled(true);
-  } catch (err) {
-    window.CURRENT_IP = '';
-    setIpText('IP konnte nicht geladen werden');
-    setCopyEnabled(false);
-    console.error('[ip] Fehler beim Laden:', err);
-  }
-}
-
-function copyText() {
-  if (!window.CURRENT_IP) return;
-  navigator.clipboard.writeText(window.CURRENT_IP);
-}
-
-async function loadIpConfig() {
-  const res = await fetch(IP_CONFIG_PATH, { cache: 'no-store' });
-  if (!res.ok) {
-    throw new Error('Konnte ip.yml nicht laden: HTTP ' + res.status);
-  }
-  return jsyaml.load(await res.text()) || {};
-}
-
-function normalizeIpSource(source) {
-  const normalized = String(source || "").trim().toLowerCase();
-  if (normalized === "fixed") return "fixed";
-  if (normalized === "domain") return "domain";
-  return "json";
-}
-
-async function resolveIpFromJson(config) {
-  const jsonUrl = String(config.json_url || "").trim();
-  const jsonField = String(config.json_field || "ip").trim();
-  if (!jsonUrl) {
-    throw new Error('json_url fehlt in ip.yml');
-  }
-
-  const res = await fetch(jsonUrl, { cache: 'no-store' });
-  if (!res.ok) {
-    throw new Error('json_url antwortet mit HTTP ' + res.status);
-  }
-
-  const data = await res.json();
-  const value = data && typeof data[jsonField] === "string" ? data[jsonField].trim() : "";
-  if (!value) {
-    throw new Error('json_field "' + jsonField + '" ist leer oder fehlt');
-  }
-  return value;
-}
-
-function resolveIpFromFixed(config) {
-  const fixedIp = String(config.fixed_ip || "").trim();
-  return fixedIp;
-}
-
-function resolveIpFromDomain(config) {
-  const domain = String(config.domain || "").trim();
-  return domain;
-}
-
-async function resolveIpValue() {
-  const config = await loadIpConfig();
-  const source = normalizeIpSource(config.ip_source);
-  if (source === "fixed") return resolveIpFromFixed(config);
-  if (source === "domain") return resolveIpFromDomain(config);
-  return resolveIpFromJson(config);
-}
-
-$(document).ready(function() {
-  setCopyEnabled(false);
-  loadCurrentIp();
-
-  $('.main1_ipcopier').click(function() {
-    if (!window.CURRENT_IP) return;
-    var popup = $('<div>', { class: 'main1_popup' }).append($('<h3 class="copy_confirm">').text('IP in die Zwischenablage kopiert'));
-    $(this).after(popup);
-    setTimeout(function() { popup.remove(); }, 1000);
-  });
-
-  const scrollLinks = document.querySelectorAll('.scroll');
-  scrollLinks.forEach(function(link) {
-    link.addEventListener('click', function(event) {
-      const href = link.getAttribute('href') || '';
-      const hashIndex = href.indexOf('#');
+function setupScrollLinks() {
+  const scrollLinks = document.querySelectorAll(".scroll");
+  scrollLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href") || "";
+      const hashIndex = href.indexOf("#");
       if (hashIndex === -1) return;
 
       const hash = href.slice(hashIndex);
@@ -306,14 +135,150 @@ $(document).ready(function() {
       if (!target) return;
 
       event.preventDefault();
-      const offsetTop = target.offsetTop;
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+      window.scrollTo({ top: target.offsetTop, behavior: "smooth" });
     });
   });
-});
+}
+
+function buildYoutubeUrl(handle) {
+  const normalized = String(handle || "").trim().replace(/^@/, "");
+  return normalized ? `https://www.youtube.com/@${normalized}` : "";
+}
+
+function buildSubscribeUrl(handle) {
+  const channelUrl = buildYoutubeUrl(handle);
+  return channelUrl ? `${channelUrl}?sub_confirmation=1` : "";
+}
+
+function renderProjects(projects) {
+  const container = document.getElementById("projects-list");
+  const section = document.getElementById("projects");
+  if (!container || !section) return;
+
+  container.innerHTML = "";
+
+  if (!Array.isArray(projects) || projects.length === 0) {
+    section.style.display = "none";
+    return;
+  }
+
+  projects.forEach(p => {
+    const card = document.createElement("a");
+    card.className = "main5_supporters_div main5_group_link main5_project_link";
+    card.href = p.url || "#";
+    card.style.setProperty("--rank-glow", p.glow_color || "#00d8ff");
+
+    const image = document.createElement("img");
+    image.className = "main5_supporters_img";
+    image.src = p.image || "/media/placeholder.png";
+    image.alt = p.name || "Projektbild";
+
+    const textWrap = document.createElement("div");
+    textWrap.className = "main5_supporters_description_div";
+
+    const title = document.createElement("div");
+    title.className = "main5_supporters_description_title";
+    title.textContent = p.name || "Projekt";
+
+    const description = document.createElement("div");
+    description.className = "main5_supporters_description";
+    description.textContent = p.description || "";
+
+    textWrap.appendChild(title);
+    textWrap.appendChild(description);
+    card.appendChild(image);
+    card.appendChild(textWrap);
+    container.appendChild(card);
+  });
+}
+  
+function renderVideoActions(youtube) {
+  const actions = document.getElementById("videos-actions");
+  if (!actions) return;
+
+  actions.innerHTML = "";
+  const channelUrl = youtube.channel_url || buildYoutubeUrl(youtube.handle);
+  const subscribeUrl = youtube.subscribe_url || buildSubscribeUrl(youtube.handle);
+
+  [
+    { href: channelUrl, label: youtube.channel_button_label || "Zum Kanal" },
+    { href: subscribeUrl, label: youtube.subscribe_button_label || "Abonnieren", modifier: "subscribe" }
+  ]
+    .filter((entry) => entry.href)
+    .forEach((entry) => {
+      const link = document.createElement("a");
+      link.className = "discord-widget__join youtube-widget__join";
+      link.href = entry.href;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = entry.label;
+      actions.appendChild(link);
+    });
+}
+
+function applyHomepageConfig(cfg) {
+  const site = cfg.site || {};
+  const hero = cfg.hero || {};
+  const sections = cfg.sections || {};
+  const discord = cfg.discord || {};
+  const youtube = cfg.youtube || {};
+  const widget = document.getElementById("homepage-discord-widget");
+  const communitySection = document.querySelector(".main4");
+
+  if (site.title) {
+    document.title = site.title;
+  }
+
+  setText("hero-accent", hero.accent);
+  setText("hero-text", hero.text);
+  setText("projects-heading", sections.projects_heading);
+  setText("about-heading", sections.about_heading);
+  setText("community-heading", sections.community_heading);
+  setText("videos-heading", sections.videos_heading);
+  setText("videos-intro", sections.videos_intro);
+  setText("videos-channel-name", youtube.channel_name || youtube.handle || "YouTube");
+  renderVideoActions(youtube);
+
+  if (widget) {
+    if (discord.server_id) {
+      widget.dataset.serverId = discord.server_id;
+    }
+    if (discord.invite_url) {
+      widget.dataset.inviteUrl = discord.invite_url;
+    }
+  }
+
+  if (communitySection && !discord.server_id) {
+    communitySection.style.display = "none";
+  }
+
+  if (widget && discord.server_id && window.DiscordWidget && typeof window.DiscordWidget.init === "function") {
+    window.DiscordWidget.init(document);
+  }
+}
+
+/* INIT */
+async function init() {
+  const cfg = (await loadYamlFile(CONTENT_PATH)) || {};
+  applyHomepageConfig(cfg);
+  setupScrollLinks();
+
+  const projects = (await loadYamlFile(PROJECTS_PATH)) || [];
+  renderProjects(Array.isArray(projects) ? projects : []);
+
+  if (cfg.youtube && cfg.youtube.enabled === false) {
+    const videosSection = document.getElementById("videos-section");
+    if (videosSection) {
+      videosSection.style.display = "none";
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", init);
 </script>
   
 <script src="/media/discord-widget.js?v=20260304c"></script>
+<script src="/media/site.js?v=20260504a"></script>
 <script src="/userpages/users.js?v=20260301d"></script>
 </body>
 </html>

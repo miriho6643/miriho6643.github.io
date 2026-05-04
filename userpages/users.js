@@ -104,8 +104,8 @@ function createGroupCard(group) {
     card.classList.add("main5_group_link_no_image");
     card.style.minHeight = "auto";
     card.style.height = "auto";
-    card.style.width = "min(36rem, calc(100% - 2rem))";
-    card.style.padding = "0.4rem 0.85rem";
+    card.style.width = "min(46rem, calc(100% - 2rem))";
+    card.style.padding = "0.9rem 1.35rem";
     card.style.display = "block";
   } else {
     card.classList.add("main5_group_link_with_image");

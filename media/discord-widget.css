@@ -213,7 +213,7 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 850px) {
     .tile.discord-widget {
         padding: 1.25rem;
     }

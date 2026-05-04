@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# XML sitemap for search engines
 Sitemap: https://miriho6643.github.io/sitemap.xml
