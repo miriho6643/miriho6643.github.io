@@ -108,173 +108,289 @@ const CONTENT_PATH = "/config/content.yml";
 const PROJECTS_PATH = "/config/projects.yml";
 
 async function loadYamlFile(path) {
-  const response = await fetch(path, { cache: "no-store" });
-  if (!response.ok) {
-    throw new Error(`Konnte ${path} nicht laden: HTTP ${response.status}`);
-  }
-  return jsyaml.load(await response.text());
+try {
+const response = await fetch(path, { cache: "no-store" });
+
+```
+if (!response.ok) {
+  console.error(`${path}: HTTP ${response.status}`);
+  return null;
+}
+
+const text = await response.text();
+return jsyaml.load(text) || {};
+```
+
+} catch (err) {
+console.error(`Fehler beim Laden von ${path}:`, err);
+return null;
+}
 }
 
 function setText(id, value) {
-  const element = document.getElementById(id);
-  if (element && value) {
-    element.textContent = value;
-  }
+const element = document.getElementById(id);
+if (element) {
+element.textContent = value ?? "";
+}
 }
 
 function setupScrollLinks() {
-  const scrollLinks = document.querySelectorAll(".scroll");
-  scrollLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const href = link.getAttribute("href") || "";
-      const hashIndex = href.indexOf("#");
-      if (hashIndex === -1) return;
+document.querySelectorAll(".scroll").forEach(link => {
+link.addEventListener("click", event => {
+const href = link.getAttribute("href") || "";
+const hash = href.split("#")[1];
 
-      const hash = href.slice(hashIndex);
-      const target = document.querySelector(hash);
-      if (!target) return;
+```
+  if (!hash) return;
 
-      event.preventDefault();
-      window.scrollTo({ top: target.offsetTop, behavior: "smooth" });
-    });
+  const target = document.getElementById(hash);
+
+  if (!target) return;
+
+  event.preventDefault();
+
+  window.scrollTo({
+    top: target.offsetTop,
+    behavior: "smooth"
   });
+});
+```
+
+});
 }
 
 function buildYoutubeUrl(handle) {
-  const normalized = String(handle || "").trim().replace(/^@/, "");
-  return normalized ? `https://www.youtube.com/@${normalized}` : "";
+const normalized = String(handle || "")
+.trim()
+.replace(/^@/, "");
+
+return normalized
+? `https://www.youtube.com/@${normalized}`
+: "";
 }
 
 function buildSubscribeUrl(handle) {
-  const channelUrl = buildYoutubeUrl(handle);
-  return channelUrl ? `${channelUrl}?sub_confirmation=1` : "";
+const url = buildYoutubeUrl(handle);
+return url ? `${url}?sub_confirmation=1` : "";
 }
 
 function renderProjects(projects) {
-  const container = document.getElementById("projects-list");
-  const section = document.getElementById("projects");
-  if (!container || !section) return;
+const container = document.getElementById("projects-list");
+const section = document.getElementById("projects");
 
-  container.innerHTML = "";
+if (!container || !section) return;
 
-  if (!Array.isArray(projects) || projects.length === 0) {
-    section.style.display = "none";
-    return;
-  }
+container.innerHTML = "";
 
-  projects.forEach(p => {
-    const card = document.createElement("a");
-    card.className = "main5_supporters_div main5_group_link main5_project_link";
-    card.href = p.url || "#";
-    card.style.setProperty("--rank-glow", p.glow_color || "#00d8ff");
-
-    const image = document.createElement("img");
-    image.className = "main5_supporters_img";
-    image.src = p.image || "/media/placeholder.png";
-    image.alt = p.name || "Projektbild";
-
-    const textWrap = document.createElement("div");
-    textWrap.className = "main5_supporters_description_div";
-
-    const title = document.createElement("div");
-    title.className = "main5_supporters_description_title";
-    title.textContent = p.name || "Projekt";
-
-    const description = document.createElement("div");
-    description.className = "main5_supporters_description";
-    description.textContent = p.description || "";
-
-    textWrap.appendChild(title);
-    textWrap.appendChild(description);
-    card.appendChild(image);
-    card.appendChild(textWrap);
-    container.appendChild(card);
-  });
+if (!Array.isArray(projects) || projects.length === 0) {
+section.style.display = "none";
+return;
 }
-  
+
+section.style.display = "";
+
+projects.forEach(project => {
+const card = document.createElement("a");
+
+```
+card.className =
+  "main5_supporters_div main5_group_link main5_project_link";
+
+card.href = project.url || "#";
+
+card.style.setProperty(
+  "--rank-glow",
+  project.glow_color || "#00d8ff"
+);
+
+card.innerHTML = `
+  <img
+    class="main5_supporters_img"
+    src="${project.image || '/media/placeholder.png'}"
+    alt="${project.name || 'Projekt'}">
+
+  <div class="main5_supporters_description_div">
+    <div class="main5_supporters_description_title">
+      ${project.name || "Projekt"}
+    </div>
+
+    <div class="main5_supporters_description">
+      ${project.description || ""}
+    </div>
+  </div>
+`;
+
+container.appendChild(card);
+```
+
+});
+}
+
 function renderVideoActions(youtube) {
-  const actions = document.getElementById("videos-actions");
-  if (!actions) return;
+const actions = document.getElementById("videos-actions");
 
-  actions.innerHTML = "";
-  const channelUrl = youtube.channel_url || buildYoutubeUrl(youtube.handle);
-  const subscribeUrl = youtube.subscribe_url || buildSubscribeUrl(youtube.handle);
+if (!actions) return;
 
-  [
-    { href: channelUrl, label: youtube.channel_button_label || "Zum Kanal" },
-    { href: subscribeUrl, label: youtube.subscribe_button_label || "Abonnieren", modifier: "subscribe" }
-  ]
-    .filter((entry) => entry.href)
-    .forEach((entry) => {
-      const link = document.createElement("a");
-      link.className = "discord-widget__join youtube-widget__join";
-      link.href = entry.href;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = entry.label;
-      actions.appendChild(link);
-    });
+actions.innerHTML = "";
+
+const channelUrl =
+youtube?.channel_url ||
+buildYoutubeUrl(youtube?.handle);
+
+const subscribeUrl =
+youtube?.subscribe_url ||
+buildSubscribeUrl(youtube?.handle);
+
+const buttons = [
+{
+href: channelUrl,
+label: youtube?.channel_button_label || "Zum Kanal"
+},
+{
+href: subscribeUrl,
+label: youtube?.subscribe_button_label || "Abonnieren"
+}
+];
+
+buttons
+.filter(btn => btn.href)
+.forEach(btn => {
+const link = document.createElement("a");
+
+```
+  link.className =
+    "discord-widget__join youtube-widget__join";
+
+  link.href = btn.href;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+
+  link.textContent = btn.label;
+
+  actions.appendChild(link);
+});
+```
+
 }
 
 function applyHomepageConfig(cfg) {
-  const site = cfg.site || {};
-  const hero = cfg.hero || {};
-  const sections = cfg.sections || {};
-  const discord = cfg.discord || {};
-  const youtube = cfg.youtube || {};
-  const widget = document.getElementById("homepage-discord-widget");
-  const communitySection = document.querySelector(".main4");
+const site = cfg?.site || {};
+const hero = cfg?.hero || {};
+const sections = cfg?.sections || {};
+const discord = cfg?.discord || {};
+const youtube = cfg?.youtube || {};
 
-  if (site.title) {
-    document.title = site.title;
-  }
-
-  setText("hero-accent", hero.accent);
-  setText("hero-text", hero.text);
-  setText("projects-heading", sections.projects_heading);
-  setText("about-heading", sections.about_heading);
-  setText("community-heading", sections.community_heading);
-  setText("videos-heading", sections.videos_heading);
-  setText("videos-intro", sections.videos_intro);
-  setText("videos-channel-name", youtube.channel_name || youtube.handle || "YouTube");
-  renderVideoActions(youtube);
-
-  if (widget) {
-    if (discord.server_id) {
-      widget.dataset.serverId = discord.server_id;
-    }
-    if (discord.invite_url) {
-      widget.dataset.inviteUrl = discord.invite_url;
-    }
-  }
-
-  if (communitySection && !discord.server_id) {
-    communitySection.style.display = "none";
-  }
-
-  if (widget && discord.server_id && window.DiscordWidget && typeof window.DiscordWidget.init === "function") {
-    window.DiscordWidget.init(document);
-  }
+if (site.title) {
+document.title = site.title;
 }
 
-/* INIT */
+setText("hero-accent", hero.accent);
+setText("hero-text", hero.text);
+
+setText("projects-heading", sections.projects_heading);
+setText("about-heading", sections.about_heading);
+setText("community-heading", sections.community_heading);
+
+setText("videos-heading", sections.videos_heading);
+setText("videos-intro", sections.videos_intro);
+
+setText(
+"videos-channel-name",
+youtube.channel_name ||
+youtube.handle ||
+"YouTube"
+);
+
+renderVideoActions(youtube);
+
+const widget =
+document.getElementById(
+"homepage-discord-widget"
+);
+
+if (widget && discord.server_id) {
+widget.dataset.serverId =
+discord.server_id;
+}
+
+if (widget && discord.invite_url) {
+widget.dataset.inviteUrl =
+discord.invite_url;
+}
+
+const communitySection =
+document.querySelector(".main4");
+
+if (
+communitySection &&
+!discord.server_id
+) {
+communitySection.style.display =
+"none";
+}
+
+if (
+widget &&
+discord.server_id &&
+window.DiscordWidget?.init
+) {
+try {
+window.DiscordWidget.init(document);
+} catch (err) {
+console.error(
+"Discord Widget Fehler:",
+err
+);
+}
+}
+}
+
 async function init() {
-  const cfg = (await loadYamlFile(CONTENT_PATH)) || {};
-  applyHomepageConfig(cfg);
-  setupScrollLinks();
+try {
+const cfg =
+(await loadYamlFile(CONTENT_PATH))
+|| {};
 
-  const projects = (await loadYamlFile(PROJECTS_PATH)) || [];
-  renderProjects(Array.isArray(projects) ? projects : []);
+```
+applyHomepageConfig(cfg);
 
-  if (cfg.youtube && cfg.youtube.enabled === false) {
-    const videosSection = document.getElementById("videos-section");
-    if (videosSection) {
-      videosSection.style.display = "none";
-    }
-  }
+setupScrollLinks();
+
+const projects =
+  (await loadYamlFile(PROJECTS_PATH))
+  || [];
+
+renderProjects(
+  Array.isArray(projects)
+    ? projects
+    : []
+);
+
+if (
+  cfg?.youtube?.enabled === false
+) {
+  document
+    .getElementById("videos-section")
+    ?.style.setProperty(
+      "display",
+      "none"
+    );
+}
+```
+
+} catch (err) {
+console.error(
+"Initialisierung fehlgeschlagen:",
+err
+);
+}
 }
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener(
+"DOMContentLoaded",
+init
+);
+
 </script>
   
 <script src="/media/discord-widget.js?v=20260304c"></script>
