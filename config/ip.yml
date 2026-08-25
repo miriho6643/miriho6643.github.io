@@ -10,3 +10,6 @@ fixed_ip: "localhost"
 
 # Bei ip_source: "domain"
 domain: ""
+
+#site.js
+backend: "localhost"
