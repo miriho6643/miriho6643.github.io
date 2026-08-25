@@ -1,7 +1,7 @@
 - id: discord
   label: "Discord"
   subtitle: "Hier findest du mich online."
-  url: "https://discord.gg/nAxnN4admc"
+  url: "https://discord.gg/nAxnN4admc?utm_source=miriho6643web"
   icon: "discord.svg"
   accentColor: "#5865F2"
   cardBackground: "var(--background2)"
@@ -14,7 +14,7 @@
 - id: twitch
   label: "Twitch"
   subtitle: "Hier findest du mich online."
-  url: "https://twitch.tv/miriho6643"
+  url: "https://twitch.tv/miriho6643?utm_source=miriho6643web"
   icon: "twitch.svg"
   accentColor: "#9146FF"
   cardBackground: "var(--background2)"
@@ -27,7 +27,7 @@
 - id: youtube
   label: "Youtube"
   subtitle: "Hier findest du mich online."
-  url: "https://youtube.com/@Miriho6643YT"
+  url: "https://youtube.com/@Miriho6643YT?utm_source=miriho6643web"
   icon: "youtube.svg"
   accentColor: "#CD201F"
   cardBackground: "var(--background2)"
@@ -40,7 +40,7 @@
 - id: whatsapp-kanal
   label: "Whatsapp Kanal"
   subtitle: "Hier findest du mich online."
-  url: "https://whatsapp.com/channel/0029Vb7FNg6BqbrF2Kzrsv07"
+  url: "https://whatsapp.com/channel/0029Vb7FNg6BqbrF2Kzrsv07?utm_source=miriho6643web"
   icon: "whatsapp.svg"
   accentColor: "#25D366"
   cardBackground: "var(--background2)"
@@ -53,7 +53,7 @@
 - id: github
   label: "GitHub"
   subtitle: "Hier findest du mich online."
-  url: "https://github.com/miriho6643"
+  url: "https://github.com/miriho6643?utm_source=miriho6643web"
   icon: "github.svg"
   accentColor: "#FFFFFF"
   cardBackground: "var(--background2)"
@@ -66,7 +66,7 @@
 - id: patreon
   label: "Patreon"
   subtitle: "Hier findest du mich online."
-  url: "https://patreon.com/miriho6643"
+  url: "https://patreon.com/miriho6643?utm_source=miriho6643web"
   icon: "patreon.svg"
   accentColor: "#FFFFFF"
   cardBackground: "var(--background2)"
