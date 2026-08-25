@@ -14,14 +14,14 @@ sections:
 
 discord:
     server_id: '1398660969500246137'
-    invite_url: 'https://discord.gg/NHnzNF2rYv'
+    invite_url: 'https://discord.gg/NHnzNF2rYv?utm_source=miriho6643web'
 
 youtube:
     enabled: true
     channel_name: 'Miriho6643YT'
     handle: 'miriho6643yt'
-    channel_url: 'https://youtube.com/@miriho6643yt'
-    subscribe_url: 'https://www.youtube.com/@miriho6643yt?sub_confirmation=1'
+    channel_url: 'https://youtube.com/@miriho6643yt?utm_source=miriho6643web'
+    subscribe_url: 'https://www.youtube.com/@miriho6643yt?sub_confirmation=1&&utm_source=miriho6643web'
     channel_button_label: 'Zum Kanal'
     subscribe_button_label: 'Abonnieren'
     max_videos: 4
