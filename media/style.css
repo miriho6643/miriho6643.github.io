@@ -16,6 +16,7 @@ span {
     font-family: 'Space Grotesk', sans-serif;
 }
 
+
 body {
     font-family: 'Space Grotesk', sans-serif;
     background-color: var(--background1);
@@ -26,6 +27,10 @@ body {
     color: #fff;
     margin: 0;
     overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 
