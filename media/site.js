@@ -17,7 +17,7 @@
 
 (function () {
     "use strict";
-    const BACKEND_URL = await fetch("config/config.yml").then(r => r.text()).then(t => t.match(/^backend:\s*(.*)$/m)?.[1]);
+    const BACKEND_URL = await fetch("config/ip.yml").then(r => r.text()).then(t => t.match(/^backend:\s*(.*)$/m)?.[1]);
 
     const params = new URLSearchParams(window.location.search);
 
