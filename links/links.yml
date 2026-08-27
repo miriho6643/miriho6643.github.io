@@ -81,9 +81,9 @@
   subtitle: "Kleine spendee? O.o"
   url: "https://youtu.be/dQw4w9WgXcQ?utm_source=miriho6643web"
   icon: "paypal.svg"
-  accentColor: "#0000FF"
+  accentColor: "#0044FF"
   cardBackground: "var(--background2)"
-  titleColor: "#0000ff"
+  titleColor: "#ffffff"
   subtitleColor: "#d6d6d6"
   iconRadius: 0
   order: 7
