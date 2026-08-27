@@ -75,3 +75,16 @@
   iconRadius: 0
   order: 6
   enabled: true
+
+- id: PayPal
+  label: "PayPal"
+  subtitle: "Kleine spendee? O.o"
+  url: "https://youtu.be/dQw4w9WgXcQ?utm_source=miriho6643web"
+  icon: "paypal.svg"
+  accentColor: "#0000FF"
+  cardBackground: "var(--background2)"
+  titleColor: "#0000ff"
+  subtitleColor: "#d6d6d6"
+  iconRadius: 0
+  order: 7
+  enabled: true
