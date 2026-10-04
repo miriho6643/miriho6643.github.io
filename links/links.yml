@@ -37,10 +37,10 @@
   order: 3
   enabled: true
 
-- id: whatsapp-kanal
-  label: "Whatsapp Kanal"
+- id: whatsapp-community
+  label: "Whatsapp Community"
   subtitle: "Hier findest du mich online."
-  url: "https://whatsapp.com/channel/0029Vb7FNg6BqbrF2Kzrsv07?utm_source=miriho6643web"
+  url: "https://chat.whatsapp.com/DaYdce5PvcV6Nv7q6Wg68a?utm_source=miriho6643web"
   icon: "whatsapp.svg"
   accentColor: "#25D366"
   cardBackground: "var(--background2)"
