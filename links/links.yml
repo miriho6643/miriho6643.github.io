@@ -1,7 +1,7 @@
 - id: discord
   label: "Discord"
   subtitle: "Hier findest du mich online."
-  url: "https://discord.gg/nAxnN4admc?utm_source=miriho6643web"
+  url: "https://miriho6643.github.io/discord"
   icon: "discord.svg"
   accentColor: "#5865F2"
   cardBackground: "var(--background2)"
