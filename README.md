@@ -156,5 +156,4 @@ Bei größeren Änderungen bitte zuerst ein kurzes Issue/Discussion erstellen, d
 
 ## 📄 Lizenz
 
-Aktuell keine eigene Lizenzdatei hinterlegt.  
-Falls gewünscht, ergänze eine `LICENSE` (z. B. MIT).
+All rights reserved.
